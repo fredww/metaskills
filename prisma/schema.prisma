@@ -1,0 +1,565 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// User & Authentication
+// ============================================================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For password-based auth
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  assessments     Assessment[]
+  journalEntries  JournalEntry[]
+  practiceCompletions PracticeCompletion[]
+  userProgress    UserProgress[]
+  accounts        Account[]
+  sessions        Session[]
+  resourceClicks  ResourceClick[]
+  resourceRatings ResourceRating[]
+  resourceComments ResourceComment[]
+  challengeEnrollments ChallengeEnrollment[]
+  abTestAssignments ABTestAssignment[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ============================================================================
+// Assessment System
+// ============================================================================
+
+model Assessment {
+  id          String   @id @default(cuid())
+  userId      String
+  completedAt DateTime @default(now())
+
+  // Assessment responses (JSON)
+  responses   Json     // { q1: 4, q2: "scenario-choice", q3: {...} }
+
+  // Assessment result (JSON)
+  result      Json     @default("{}") // { overall, domains: {cognitive, interpersonal, self}, stage, vectors }
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("assessments")
+}
+
+// ============================================================================
+// Meta-Skills & Content
+// ============================================================================
+
+model MetaSkill {
+  id          String   @id @default(cuid())
+  code        String   @unique // e.g., "critical-thinking"
+  title       String
+  domain      Domain   // COGNITIVE, INTERPERSONAL, SELF
+  stage       Int      // 1-5
+
+  // Content
+  description String   @db.Text
+  definition  String   @db.Text
+  whyImportant String  @db.Text
+  lifeApplications Json // Array of application examples
+  scientificBackground String? @db.Text
+
+  // Metadata
+  order       Int      // For sorting within domain
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  practices   Practice[]
+  userProgress UserProgress[]
+
+  @@map("meta_skills")
+}
+
+enum Domain {
+  COGNITIVE
+  INTERPERSONAL
+  SELF
+}
+
+model Practice {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+
+  // Metadata
+  duration    Int      // in minutes
+  difficulty  Difficulty // BEGINNER, INTERMEDIATE, ADVANCED
+  emotionTone Emotion  // CALM, ENERGIZING, REFLECTIVE, CHALLENGING
+
+  // Content
+  instructions Json    // Step-by-step instructions
+  benefits    String[]
+  tips        String[]
+
+  // Relations
+  skillId     String
+  skill       MetaSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  completions PracticeCompletion[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("practices")
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Emotion {
+  CALM
+  ENERGIZING
+  REFLECTIVE
+  CHALLENGING
+}
+
+// ============================================================================
+// User Progress & Journal
+// ============================================================================
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  skillId     String
+
+  // Current stage (1-5)
+  stage       Int      @default(1)
+
+  // 4D Vector scores
+  awareness   Float    @default(0)
+  stability   Float    @default(0)
+  practice    Float    @default(0)
+  growth      Float    @default(0)
+
+  // Metadata
+  lastAssessedAt DateTime?
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill       MetaSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId])
+  @@map("user_progress")
+}
+
+model JournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+
+  // Content
+  title       String?
+  content     String   @db.Text
+  mood        Int?     // 1-10 mood score
+
+  // Skill associations (JSON array of skill IDs)
+  associatedSkills Json?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("journal_entries")
+}
+
+model PracticeCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  practiceId  String
+
+  completedAt DateTime @default(now())
+  notes       String?  @db.Text
+  rating      Int?     // 1-5 user rating
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  practice    Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+
+  @@map("practice_completions")
+}
+
+// ============================================================================
+// Resource Recommendations
+// ============================================================================
+
+model ResourceClick {
+  id          String   @id @default(cuid())
+  userId      String
+
+  // Resource details
+  resourceType ResourceType // BOOK, TOOL, COURSE
+  resourceTitle String
+  resourceUrl   String
+  skillCode     String   // Which skill this resource is related to
+
+  // Click context
+  clickSource  ClickSource // SKILL_PAGE, PRACTICE_MODAL, DASHBOARD
+  metadata     Json?     // Additional context (e.g., practiceId if from modal)
+
+  clickedAt   DateTime @default(now())
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, skillCode])
+  @@index([resourceType, clickedAt])
+  @@map("resource_clicks")
+}
+
+enum ResourceType {
+  BOOK
+  TOOL
+  COURSE
+  ARTICLE
+  VIDEO
+}
+
+enum ClickSource {
+  SKILL_PAGE
+  PRACTICE_MODAL
+  DASHBOARD
+  RECOMMENDATION_EMAIL
+}
+
+// ============================================================================
+// Resource Ratings & Comments
+// ============================================================================
+
+model ResourceRating {
+  id          String   @id @default(cuid())
+  userId      String
+
+  // Resource identification
+  resourceType ResourceType
+  resourceUrl  String   // Use URL as unique identifier for external resources
+  skillCode    String
+
+  // Rating
+  rating       Int      // 1-5 stars
+
+  // Optional review text
+  review       String?  @db.Text
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, resourceUrl])
+  @@index([resourceUrl, rating])
+  @@index([skillCode, resourceType])
+  @@map("resource_ratings")
+}
+
+model ResourceComment {
+  id          String   @id @default(cuid())
+  userId      String
+
+  // Resource identification
+  resourceType ResourceType
+  resourceUrl  String
+  skillCode    String
+
+  // Comment
+  content     String   @db.Text
+
+  // Thread support
+  parentId    String?
+  parent      ResourceComment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     ResourceComment[] @relation("CommentReplies")
+
+  // Engagement
+  likes       Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([resourceUrl, createdAt])
+  @@index([skillCode, resourceType])
+  @@map("resource_comments")
+}
+
+// ============================================================================
+// Resource Challenges
+// ============================================================================
+
+model Challenge {
+  id          String   @id @default(cuid())
+
+  // Challenge details
+  title       String
+  description String   @db.Text
+  type        ChallengeType
+
+  // Requirements
+  targetCount Int      // Number of books/tools to complete
+  timeframe   Int      // Days to complete
+  skillCode   String?  // Optional: skill-specific challenge
+
+  // Rewards
+  badgeUrl    String?
+  badgeTitle  String?
+
+  // Status
+  isActive    Boolean  @default(true)
+  startDate   DateTime?
+  endDate     DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  enrollments ChallengeEnrollment[]
+
+  @@index([type, isActive])
+  @@index([skillCode])
+  @@map("challenges")
+}
+
+model ChallengeEnrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  challengeId String
+
+  // Progress
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  progress    Int      @default(0) // Number of books/tools completed
+
+  // Resources tracked in this challenge
+  resourceUrls String[] // Array of resource URLs completed
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, challengeId])
+  @@index([userId, completedAt])
+  @@map("challenge_enrollments")
+}
+
+enum ChallengeType {
+  READING_CHALLENGE
+  SKILL_MASTERY
+  TOOL_EXPLORATION
+  LEARNING_STREAK
+}
+
+// ============================================================================
+// Expert Interviews & Articles
+// ============================================================================
+
+model Article {
+  id          String   @id @default(cuid())
+
+  // Content
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  excerpt     String   @db.Text
+
+  // Metadata
+  type        ArticleType
+  skillCode   String?
+  authorName  String
+  authorTitle String
+  authorImage String?
+
+  // Media
+  coverImage  String?
+  category    String?
+
+  // Engagement
+  views       Int      @default(0)
+  likes       Int      @default(0)
+
+  // Status
+  isPublished Boolean  @default(true)
+  publishedAt DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([type, skillCode, isPublished])
+  @@index([slug])
+  @@map("articles")
+}
+
+enum ArticleType {
+  EXPERT_INTERVIEW
+  LEARNING_INSIGHTS
+  SUCCESS_STORY
+  RESEARCH_SUMMARY
+}
+
+// ============================================================================
+// A/B Testing System
+// ============================================================================
+
+model ABTest {
+  id          String   @id @default(cuid())
+
+  // Test details
+  name        String
+  description String?  @db.Text
+  isActive    Boolean  @default(true)
+
+  // Test configuration
+  trafficAllocation Int @default(50) // Percentage for variant A (rest goes to B)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+
+  // What we're testing
+  testType    TestType // RESOURCE_LAYOUT, CTA_POSITION, THUMBNAIL_SIZE
+  testContext String   // Where the test runs (e.g., "skill-page", "resources-list")
+
+  // Variant configurations (JSON)
+  variantA    Json     // Configuration for control group
+  variantB    Json     // Configuration for test group
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  assignments ABTestAssignment[]
+
+  @@index([isActive, startDate])
+  @@index([testType, testContext])
+  @@map("ab_tests")
+}
+
+model ABTestAssignment {
+  id          String   @id @default(cuid())
+  userId      String?
+
+  // Which test
+  testId      String
+  test        ABTest   @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  // Assigned variant
+  variant     String   // "A" or "B"
+
+  // Assignment metadata
+  sessionId   String?
+  assignedAt  DateTime @default(now())
+
+  // Relations
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversions ABTestConversion[]
+
+  @@index([testId, variant])
+  @@index([userId, testId])
+  @@map("ab_test_assignments")
+}
+
+model ABTestConversion {
+  id          String   @id @default(cuid())
+
+  // Which assignment
+  assignmentId String
+  assignment   ABTestAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+
+  // Conversion details
+  conversionType ConversionType // CLICK, VIEW, RATE, COMMENT
+  resourceUrl   String?
+  metadata      Json?
+
+  convertedAt  DateTime @default(now())
+
+  @@index([assignmentId, conversionType])
+  @@index([conversionType, convertedAt])
+  @@map("ab_test_conversions")
+}
+
+enum TestType {
+  RESOURCE_LAYOUT
+  CTA_POSITION
+  THUMBNAIL_SIZE
+  CARD_ORIENTATION
+  DESCRIPTION_LENGTH
+}
+
+enum ConversionType {
+  CLICK       // User clicked on a resource
+  VIEW        // User viewed resource details
+  RATE        // User rated a resource
+  COMMENT     // User commented on a resource
+  ENGAGEMENT  // Any meaningful engagement
+}

@@ -1,0 +1,1186 @@
+import { PrismaClient, Domain } from '@prisma/client'
+import bcrypt from 'bcryptjs'
+import 'dotenv/config'
+
+const prisma = new PrismaClient()
+
+// 24 Meta-Skills across 3 domains
+const metaSkills = [
+  // Cognitive System (8 skills)
+  {
+    name: 'Learning to Learn',
+    domain: Domain.COGNITIVE,
+    description: 'The ability to learn new things quickly and effectively, adapting your learning strategies to different situations.',
+    benefits: [
+      'Faster skill acquisition',
+      'Adaptability to new technologies',
+      'Continuous growth mindset'
+    ],
+    tips: [
+      'Focus on understanding principles rather than facts',
+      'Teach what you learn to others',
+      'Connect new knowledge to existing mental models'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Critical Thinking',
+    domain: Domain.COGNITIVE,
+    description: 'The objective analysis and evaluation of an issue in order to form a judgment.',
+    benefits: [
+      'Better decision-making',
+      'Reduced cognitive bias',
+      'Improved problem-solving'
+    ],
+    tips: [
+      'Question assumptions regularly',
+      'Seek out contradictory evidence',
+      'Practice the "5 Whys" technique'
+    ],
+    difficulty: 'ADVANCED'
+  },
+  {
+    name: 'Systems Thinking',
+    domain: Domain.COGNITIVE,
+    description: 'Understanding how different parts influence each other within a whole, seeing patterns rather than isolated events.',
+    benefits: [
+      'Strategic perspective',
+      'Understanding root causes',
+      'Predicting consequences'
+    ],
+    tips: [
+      'Map out relationships before taking action',
+      'Look for feedback loops',
+      'Consider delayed effects'
+    ],
+    difficulty: 'ADVANCED'
+  },
+  {
+    name: 'Decision Making',
+    domain: Domain.COGNITIVE,
+    description: 'The process of making choices by identifying a decision, gathering information, and assessing alternative resolutions.',
+    benefits: [
+      'Confidence in choices',
+      'Reduced decision fatigue',
+      'Better outcomes'
+    ],
+    tips: [
+      'Separate decisions from outcomes',
+      'Use decision frameworks',
+      'Set decision deadlines'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Metacognition',
+    domain: Domain.COGNITIVE,
+    description: 'Awareness and understanding of one\'s own thought processes, often called "thinking about thinking."',
+    benefits: [
+      'Self-awareness of learning patterns',
+      'Strategic learning',
+      'Error recognition'
+    ],
+    tips: [
+      'Pause to reflect on how you\'re thinking',
+      'Notice your cognitive blind spots',
+      'Ask "what am I missing?"'
+    ],
+    difficulty: 'ADVANCED'
+  },
+  {
+    name: 'Creativity',
+    domain: Domain.COGNITIVE,
+    description: 'The ability to generate novel and valuable ideas, connecting seemingly unrelated concepts.',
+    benefits: [
+      'Innovative problem-solving',
+      'Adaptability',
+      'Personal expression'
+    ],
+    tips: [
+      'Embrace constraints as creative challenges',
+      'Expose yourself to diverse inputs',
+      'Quantity leads to quality'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Attention Management',
+    domain: Domain.COGNITIVE,
+    description: 'The ability to control and direct focus, resisting distractions and maintaining deep work.',
+    benefits: [
+      'Increased productivity',
+      'Deeper work quality',
+      'Reduced stress'
+    ],
+    tips: [
+      'Work in focused blocks (90 min)',
+      'Create friction for distractions',
+      'Practice single-tasking'
+    ],
+    difficulty: 'BEGINNER'
+  },
+  {
+    name: 'Information Synthesis',
+    domain: Domain.COGNITIVE,
+    description: 'The ability to combine multiple pieces of information into a coherent understanding.',
+    benefits: [
+      'Better learning from multiple sources',
+      'Unique insights',
+      'Effective communication'
+    ],
+    tips: [
+      'Look for patterns across sources',
+      'Build mental models incrementally',
+      'Test your synthesis with others'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+
+  // Interpersonal System (8 skills)
+  {
+    name: 'Emotional Intelligence',
+    domain: Domain.INTERPERSONAL,
+    description: 'The ability to recognize, understand, and manage your own emotions and those of others.',
+    benefits: [
+      'Better relationships',
+      'Conflict resolution',
+      'Leadership effectiveness'
+    ],
+    tips: [
+      'Name emotions to tame them',
+      'Practice active listening',
+      'Pause before reacting'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Communication',
+    domain: Domain.INTERPERSONAL,
+    description: 'The effective exchange of information, ideas, and feelings through verbal and non-verbal means.',
+    benefits: [
+      'Clearer understanding',
+      'Stronger relationships',
+      'Professional success'
+    ],
+    tips: [
+      'Listen to understand, not to respond',
+      'Match your message to the audience',
+      'Use stories to illustrate points'
+    ],
+    difficulty: 'BEGINNER'
+  },
+  {
+    name: 'Empathy',
+    domain: Domain.INTERPERSONAL,
+    description: 'The capacity to understand or feel what another person is experiencing from within their frame of reference.',
+    benefits: [
+      'Deeper connections',
+      'Reduced conflict',
+      'Better collaboration'
+    ],
+    tips: [
+      'Cultivate curiosity about others',
+      'Suspend judgment',
+      'Practice perspective-taking exercises'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Collaboration',
+    domain: Domain.INTERPERSONAL,
+    description: 'The ability to work effectively with others toward common goals, leveraging diverse strengths.',
+    benefits: [
+      'Better team outcomes',
+      'Personal growth through others',
+      'Shared accomplishment'
+    ],
+    tips: [
+      'Clarify roles and expectations',
+      'Appreciate diverse working styles',
+      'Give credit generously'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Influence',
+    domain: Domain.INTERPERSONAL,
+    description: 'The capacity to have an effect on the character, development, or behavior of someone or something.',
+    benefits: [
+      'Leadership impact',
+      'Persuasive communication',
+      'Positive change-making'
+    ],
+    tips: [
+      'Lead with inspiration not coercion',
+      'Build trust first',
+      'Understand others\' motivations'
+    ],
+    difficulty: 'ADVANCED'
+  },
+  {
+    name: 'Conflict Resolution',
+    domain: Domain.INTERPERSONAL,
+    description: 'The ability to find peaceful solutions to disagreements and disputes.',
+    benefits: [
+      'Healthier relationships',
+      'Reduced stress',
+      'Team cohesion'
+    ],
+    tips: [
+      'Focus on interests not positions',
+      'Seek win-win solutions',
+      'Separate people from problems'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Social Awareness',
+    domain: Domain.INTERPERSONAL,
+    description: 'The ability to understand and respond to the needs of others, understanding social dynamics.',
+    benefits: [
+      'Better reading of situations',
+      'Cultural sensitivity',
+      'Team intuition'
+    ],
+    tips: [
+      'Observe group dynamics',
+      'Notice non-verbal cues',
+      'Consider context in interactions'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Coaching',
+    domain: Domain.INTERPERSONAL,
+    description: 'The skill of helping others develop their abilities and reach their goals through guided support.',
+    benefits: [
+      'Multiplying your impact',
+      'Leadership development',
+      'Learning through teaching'
+    ],
+    tips: [
+      'Ask powerful questions',
+      'Focus on strengths',
+      'Provide specific feedback'
+    ],
+    difficulty: 'ADVANCED'
+  },
+
+  // Self System (8 skills)
+  {
+    name: 'Self-Awareness',
+    domain: Domain.SELF,
+    description: 'The conscious knowledge of one\'s own character, feelings, motives, and desires.',
+    benefits: [
+      'Better life choices',
+      'Authentic living',
+      'Emotional regulation'
+    ],
+    tips: [
+      'Schedule regular reflection time',
+      'Journal for self-discovery',
+      'Seek honest feedback'
+    ],
+    difficulty: 'BEGINNER'
+  },
+  {
+    name: 'Emotional Regulation',
+    domain: Domain.SELF,
+    description: 'The ability to exert control over one\'s own emotional state, responding rather than reacting.',
+    benefits: [
+      'Emotional stability',
+      'Better relationships',
+      'Reduced regret'
+    ],
+    tips: [
+      'Recognize early warning signs',
+      'Create space between trigger and response',
+      'Have a toolkit of calming strategies'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Resilience',
+    domain: Domain.SELF,
+    description: 'The capacity to recover quickly from difficulties, toughness in the face of adversity.',
+    benefits: [
+      'Bounce back from setbacks',
+      'Stress tolerance',
+      'Long-term success'
+    ],
+    tips: [
+      'Reframe setbacks as learning',
+      'Build your support network',
+      'Practice self-compassion'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Adaptability',
+    domain: Domain.SELF,
+    description: 'The ability to adjust to new conditions and handle change with grace and effectiveness.',
+    benefits: [
+      'Career longevity',
+      'Reduced anxiety about change',
+      'Faster recovery from disruptions'
+    ],
+    tips: [
+      'Embrace uncertainty',
+      'Practice experimentation',
+      'View change as opportunity'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Mindfulness',
+    domain: Domain.SELF,
+    description: 'The quality or state of being conscious or aware of something, present-moment awareness.',
+    benefits: [
+      'Reduced stress',
+      'Improved focus',
+      'Greater life satisfaction'
+    ],
+    tips: [
+      'Start with just 5 minutes daily',
+      'Focus on breath as an anchor',
+      'Be patient with wandering mind'
+    ],
+    difficulty: 'BEGINNER'
+  },
+  {
+    name: 'Self-Discipline',
+    domain: Domain.SELF,
+    description: 'The ability to pursue what you think is right despite temptations to abandon it.',
+    benefits: [
+      'Goal achievement',
+      'Self-respect',
+      'Long-term success'
+    ],
+    tips: [
+      'Start small with habits',
+      'Design your environment for success',
+      'Focus on systems not willpower'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Values Clarity',
+    domain: Domain.SELF,
+    description: 'Understanding what truly matters to you and using that understanding to guide decisions.',
+    benefits: [
+      'Authentic life direction',
+      'Easier decision-making',
+      'Greater life satisfaction'
+    ],
+    tips: [
+      'Write your personal manifesto',
+      'Review your time allocation',
+      'Notice what energizes you'
+    ],
+    difficulty: 'INTERMEDIATE'
+  },
+  {
+    name: 'Purpose',
+    domain: Domain.SELF,
+    description: 'The sense of direction and meaning in life, understanding your "why."',
+    benefits: [
+      'Motivation and drive',
+      'Resilience in challenges',
+      'Life satisfaction'
+    ],
+    tips: [
+      'Connect daily tasks to larger meaning',
+      'Explore what you would do for free',
+      'Reflect on what you want to be remembered for'
+    ],
+    difficulty: 'ADVANCED'
+  }
+]
+
+// 50 Practices
+const practices = [
+  // Cognitive System Practices
+  {
+    name: 'The Feynman Technique',
+    description: 'Explain a concept in simple terms as if teaching someone else. Identify gaps in your understanding.',
+    duration: 15,
+    skillId: '', // Will be set after creating skills
+    emotion: 'CURIOUS',
+    instructions: [
+      'Choose a concept you want to understand better',
+      'Write a simple explanation as if teaching a 12-year-old',
+      'Identify areas where you get stuck or use jargon',
+      'Go back to source material to fill gaps',
+      'Simplify and refine your explanation'
+    ]
+  },
+  {
+    name: 'First Principles Thinking',
+    description: 'Break down a problem to its most basic truths and build up from there.',
+    duration: 20,
+    skillId: '',
+    emotion: 'FOCUSED',
+    instructions: [
+      'Identify the problem you\'re solving',
+      'Question all assumptions',
+      'Break down into fundamental truths',
+      'Build up from there',
+      'Compare with your original approach'
+    ]
+  },
+  {
+    name: 'The 5 Whys',
+    description: 'Ask "why" five times to get to the root cause of a problem.',
+    duration: 10,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'State the problem clearly',
+      'Ask "why does this problem happen?"',
+      'For each answer, ask "why" again',
+      'Repeat until you reach root cause',
+      'Address the root cause, not symptoms'
+    ]
+  },
+  {
+    name: 'Decision Matrix',
+    description: 'Create a weighted matrix to evaluate complex decisions objectively.',
+    duration: 25,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'List your options',
+      'Identify criteria that matter',
+      'Weight each criterion',
+      'Score each option',
+      'Calculate and reflect on results'
+    ]
+  },
+  {
+    name: 'Attention Sprint',
+    description: '90 minutes of single-tasked deep work without distractions.',
+    duration: 90,
+    skillId: '',
+    emotion: 'FOCUSED',
+    instructions: [
+      'Choose one meaningful task',
+      'Eliminate all notifications',
+      'Set timer for 90 minutes',
+      'Work with full focus',
+      'Take a real break after'
+    ]
+  },
+  {
+    name: 'Information Diet Audit',
+    description: 'Review and curate what information you consume daily.',
+    duration: 15,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'List all your information sources',
+      'Rate each by value and time spent',
+      'Identify low-value inputs',
+      'Create filters and boundaries',
+      'Schedule high-value input time'
+    ]
+  },
+  {
+    name: 'Mental Model Mapping',
+    description: 'Draw out how different concepts or systems relate to each other.',
+    duration: 30,
+    skillId: '',
+    emotion: 'CURIOUS',
+    instructions: [
+      'Choose a system or concept',
+      'Identify key components',
+      'Map relationships between them',
+      'Look for feedback loops',
+      'Update the map as you learn more'
+    ]
+  },
+  {
+    name: 'The Pre-Mortem',
+    description: 'Imagine a project has failed and work backward to find causes.',
+    duration: 20,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Fast-forward to project completion',
+      'Imagine it failed catastrophically',
+      'Brainstorm all possible reasons',
+      'Address preventable causes now',
+      'Create safeguards'
+    ]
+  },
+  {
+    name: 'Cognitive Restructuring',
+    description: 'Identify and challenge unhelpful thought patterns.',
+    duration: 15,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Notice a distressing thought',
+      'Write it down',
+      'Identify the pattern',
+      'Challenge the evidence',
+      'Create a balanced alternative thought'
+    ]
+  },
+  {
+    name: 'Idea Quota',
+    description: 'Generate 20 ideas in 20 minutes on any topic. Quantity over quality.',
+    duration: 20,
+    skillId: '',
+    emotion: 'PLAYFUL',
+    instructions: [
+      'Choose a problem or topic',
+      'Set timer for 20 minutes',
+      'Write down every idea without judgment',
+      'Don\'t stop until you have 20',
+      'Review and pick the best 1-3'
+    ]
+  },
+  {
+    name: 'The Learning Journal',
+    description: 'At the end of each day, write down what you learned and how you learned it.',
+    duration: 10,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Set aside 10 minutes before bed',
+      'Write "Today I learned..."',
+      'Note what helped you learn it',
+      'Record what you want to explore next',
+      'Review weekly for patterns'
+    ]
+  },
+  {
+    name: 'Perspective Switching',
+    description: 'Deliberately view a situation from multiple different perspectives.',
+    duration: 15,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Identify the situation',
+      'List all stakeholders',
+      'View from each person\'s perspective',
+      'Notice new insights',
+      'Find win-win solutions'
+    ]
+  },
+  {
+    name: 'Reverse Brainstorming',
+    description: 'Instead of how to solve a problem, ask how to cause it.',
+    duration: 15,
+    skillId: '',
+    emotion: 'PLAYFUL',
+    instructions: [
+      'Define the problem clearly',
+      'Brainstorm how to cause it',
+      'Reverse the ideas to find solutions',
+      'Often reveals hidden assumptions',
+      'Use for creative problem-solving'
+    ]
+  },
+  {
+    name: 'The 80/20 Analysis',
+    description: 'Identify the 20% of inputs that create 80% of value in any area.',
+    duration: 20,
+    skillId: '',
+    emotion: 'ANALYTICAL',
+    instructions: [
+      'Choose an area of life or work',
+      'List all activities/investments',
+      'Estimate impact of each',
+      'Identify the vital few',
+      'Focus your energy there'
+    ]
+  },
+  {
+    name: 'Concept Map Creation',
+    description: 'Create a visual map connecting related ideas and concepts.',
+    duration: 30,
+    skillId: '',
+    emotion: 'CURIOUS',
+    instructions: [
+      'Start with a central concept',
+      'Add related concepts around it',
+      'Draw connections between them',
+      'Note the nature of relationships',
+      'Expand and refine over time'
+    ]
+  },
+  {
+    name: 'Thought Experiment',
+    description: 'Conduct imaginary experiments to test your ideas and intuitions.',
+    duration: 20,
+    skillId: '',
+    emotion: 'CURIOUS',
+    instructions: [
+      'Formulate a question',
+      'Imagine a scenario',
+      'Follow the logic to conclusion',
+      'Test variations',
+      'Extract practical insights'
+    ]
+  },
+  {
+    name: 'The Devil\'s Advocate',
+    description: 'Deliberately argue against your own position to test its strength.',
+    duration: 15,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'State your current position',
+      'List your best arguments',
+      'Now argue against each one',
+      'Find weaknesses',
+      'Revise or strengthen position'
+    ]
+  },
+
+  // Interpersonal System Practices
+  {
+    name: 'Active Listening Practice',
+    description: 'Listen to someone for 5 minutes without interrupting or planning your response.',
+    duration: 10,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Find a willing conversation partner',
+      'Set a 5-minute timer',
+      'Listen fully without speaking',
+      'Don\'t plan what you\'ll say',
+      'Afterwards, reflect on what you noticed'
+    ]
+  },
+  {
+    name: 'Empathy Mapping',
+    description: 'Map out what someone else is thinking, feeling, seeing, and doing.',
+    duration: 20,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Choose a person you want to understand',
+      'Complete the four quadrants: Thinking, Feeling, Seeing, Doing',
+      'Consider their context and constraints',
+      'Use insights to improve interaction',
+      'Validate with them if appropriate'
+    ]
+  },
+  {
+    name: 'The "I" Statement',
+    description: 'Practice expressing yourself using "I" statements instead of blame.',
+    duration: 5,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Notice when you want to blame or accuse',
+      'Reframe using "I feel/think/need"',
+      'Be specific about the behavior that triggered you',
+      'State the impact',
+      'Express your request clearly'
+    ]
+  },
+  {
+    name: 'Appreciation Inventory',
+    description: 'Write down 10 things you appreciate about someone important in your life.',
+    duration: 10,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Choose someone important to you',
+      'Set a timer for 10 minutes',
+      'List 10 things you appreciate',
+      'Be specific and personal',
+      'Consider sharing it with them'
+    ]
+  },
+  {
+    name: 'Difficult Conversation Prep',
+    description: 'Prepare for a challenging conversation using the 3-conversation structure.',
+    duration: 20,
+    skillId: '',
+    emotion: 'ANXIOUS',
+    instructions: [
+      'Conversation 1: What happened? (facts)',
+      'Conversation 2: How did I feel?',
+      'Conversation 3: What\'s our shared goal?',
+      'Practice all three aloud',
+      'Have the actual conversation'
+    ]
+  },
+  {
+    name: 'Feedback Seeker',
+    description: 'Ask 3 people for specific feedback about yourself.',
+    duration: 30,
+    skillId: '',
+    emotion: 'COURAGEOUS',
+    instructions: [
+      'Identify an area for growth',
+      'Choose trusted people to ask',
+      'Make specific requests',
+      'Listen without defensiveness',
+      'Thank them and reflect'
+    ]
+  },
+  {
+    name: 'Social Experiment',
+    description: 'Try a new social behavior and observe the results.',
+    duration: 60,
+    skillId: '',
+    emotion: 'PLAYFUL',
+    instructions: [
+      'Choose one new social behavior to try',
+      'Set a specific goal',
+      'Engage with the behavior',
+      'Observe how others respond',
+      'Reflect on what you learned'
+    ]
+  },
+  {
+    name: 'Boundary Setting Practice',
+    description: 'Practice setting and maintaining a healthy boundary in a relationship.',
+    duration: 15,
+    skillId: '',
+    emotion: 'COURAGEOUS',
+    instructions: [
+      'Identify where you need a boundary',
+      'Clarify what you will and won\'t do',
+      'Communicate clearly and kindly',
+      'Expect some pushback',
+      'Hold the boundary consistently'
+    ]
+  },
+  {
+    name: 'The 5:1 Ratio',
+    description: 'In your relationships, aim for 5 positive interactions for every 1 negative.',
+    duration: 60,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Notice your interaction patterns',
+      'Track positive vs negative moments',
+      'Aim for 5:1 in important relationships',
+      'Small gestures count',
+      'Repair after negative interactions'
+    ]
+  },
+  {
+    name: 'Perspective Taking Exercise',
+    description: 'Write a narrative from someone else\'s point of view.',
+    duration: 20,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Choose a person and situation',
+      'Write their narrative: "I am [name]. I feel..."',
+      'Include their context and constraints',
+      'What are they thinking?',
+      'What do they want?'
+    ]
+  },
+  {
+    name: 'Question Artistry',
+    description: 'Practice asking powerful questions that unlock new thinking.',
+    duration: 15,
+    skillId: '',
+    emotion: 'CURIOUS',
+    instructions: [
+      'Avoid yes/no questions',
+      'Ask "what" and "how" questions',
+      'Ask "what else?" to go deeper',
+      'Ask questions that challenge assumptions',
+      'Practice on real conversations'
+    ]
+  },
+  {
+    name: 'Listening Loop',
+    description: 'Practice the mirror-verify-summation listening technique.',
+    duration: 10,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Mirror back what you heard',
+      'Verify you understood correctly',
+      'Summarize the key points',
+      'Ask if you missed anything',
+      'Respond only after this loop'
+    ]
+  },
+  {
+    name: 'Gratitude Letter',
+    description: 'Write a detailed letter of gratitude to someone who changed your life.',
+    duration: 30,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Choose someone who impacted you',
+      'Write specifically what they did',
+      'Describe how it affected you',
+      'Express what it means to you',
+      'Consider delivering it in person'
+    ]
+  },
+  {
+    name: 'Assumption Testing',
+    description: 'Test your assumptions about someone by asking them curious questions.',
+    duration: 15,
+    skillId: '',
+    emotion: 'CURIOUS',
+    instructions: [
+      'Notice an assumption about someone',
+      'Formulate a curious question',
+      'Ask without accusing',
+      'Listen to their response',
+      'Update your mental model'
+    ]
+  },
+
+  // Self System Practices
+  {
+    name: 'Morning Check-In',
+    description: 'Start each day with 5 minutes of self-awareness practice.',
+    duration: 5,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Sit quietly for 5 minutes',
+      'Notice your physical state',
+      'Identify your emotions',
+      'Set an intention for the day',
+      'Check in with yourself throughout the day'
+    ]
+  },
+  {
+    name: 'The Pause',
+    description: 'Practice taking a 3-second pause before responding to stimuli.',
+    duration: 1440,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Choose a trigger situation',
+      'When triggered, count to 3',
+      'Take a full breath',
+      'Notice the space that\'s created',
+      'Choose your response deliberately'
+    ]
+  },
+  {
+    name: 'Values Clarification',
+    description: 'Identify your top 5 values and rate your current alignment.',
+    duration: 30,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Review a list of core values',
+      'Select your top 5',
+      'For each, rate your current alignment (1-10)',
+      'Identify gaps between values and actions',
+      'Choose one area to improve this week'
+    ]
+  },
+  {
+    name: 'Energy Audit',
+    description: 'Track your energy levels throughout the day for one week.',
+    duration: 7,
+    skillId: '',
+    emotion: 'ANALYTICAL',
+    instructions: [
+      'Create a simple energy log',
+      'Rate your energy every 2 hours (1-10)',
+      'Note what you were doing',
+      'After a week, look for patterns',
+      'Restructure your day based on findings'
+    ]
+  },
+  {
+    name: 'Failure Resume',
+    description: 'Write a resume of your biggest failures and what you learned.',
+    duration: 45,
+    skillId: '',
+    emotion: 'COURAGEOUS',
+    instructions: [
+      'List significant failures in your life',
+      'For each, write what you learned',
+      'Note how it shaped you positively',
+      'Identify your growth edge',
+      'Celebrate your resilience'
+    ]
+  },
+  {
+    name: 'Worry Time',
+    description: 'Schedule 15 minutes daily to worry. Postpone all worries to that time.',
+    duration: 15,
+    skillId: '',
+    emotion: 'ANXIOUS',
+    instructions: [
+      'Choose a consistent time daily',
+      'When worries come, write them down',
+      'Tell yourself "I\'ll worry at [time]"',
+      'When worry time comes, review the list',
+      'Most worries will have faded'
+    ]
+  },
+  {
+    name: 'The Comfort Zone Stretch',
+    description: 'Do one small thing each day that makes you slightly uncomfortable.',
+    duration: 10,
+    skillId: '',
+    emotion: 'COURAGEOUS',
+    instructions: [
+      'Choose something mildly uncomfortable',
+      'It should be safe but stretching',
+      'Do the thing despite hesitation',
+      'Notice what happened',
+      'Celebrate the courage'
+    ]
+  },
+  {
+    name: 'Self-Compassion Break',
+    description: 'Practice talking to yourself as you would to a good friend.',
+    duration: 5,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Notice self-critical thoughts',
+      'Pause and take a breath',
+      'Ask "What would I tell a friend?"',
+      'Offer yourself the same kindness',
+      'Repeat as often as needed'
+    ]
+  },
+  {
+    name: 'Strengths Inventory',
+    description: 'Identify and articulate your top character strengths.',
+    duration: 30,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Ask 5 friends what they see as your strengths',
+      'Look for common themes',
+      'Identify times you felt strong',
+      'Write your top 5 strengths',
+      'Consider how to use them more'
+    ]
+  },
+  {
+    name: 'The One Thing',
+    description: 'Identify the one most important thing to do today and do it first.',
+    duration: 10,
+    skillId: '',
+    emotion: 'FOCUSED',
+    instructions: [
+      'List all your possible tasks for today',
+      'Ask "If I could only do one..."',
+      'Commit to that one thing',
+      'Do it first before anything else',
+      'Feel good about the progress'
+    ]
+  },
+  {
+    name: 'Future Self Visualization',
+    description: 'Spend 10 minutes envisioning your ideal future self.',
+    duration: 10,
+    skillId: '',
+    emotion: 'INSPIRED',
+    instructions: [
+      'Find a quiet space',
+      'Close your eyes and breathe deeply',
+      'Visualize yourself 5 years from now',
+      'Who have you become?',
+      'What matters to this future you?',
+      'What\'s one step toward that?'
+    ]
+  },
+  {
+    name: 'Trigger Mapping',
+    description: 'Identify your emotional triggers and your typical responses.',
+    duration: 20,
+    skillId: '',
+    emotion: 'REFLECTIVE',
+    instructions: [
+      'Review recent emotional episodes',
+      'Identify what triggered you',
+      'Note your automatic response',
+      'What was the pattern?',
+      'Plan an alternative for next time'
+    ]
+  },
+  {
+    name: 'The 2-Minute Rule',
+    description: 'If something takes less than 2 minutes, do it immediately.',
+    duration: 1440,
+    skillId: '',
+    emotion: 'ENERGIZED',
+    instructions: [
+      'Notice small tasks piling up',
+      'Ask "will this take less than 2 minutes?"',
+      'If yes, do it immediately',
+      'Feel the mental relief',
+      'Build momentum for bigger tasks'
+    ]
+  },
+  {
+    name: 'Body Scan Meditation',
+    description: '10-minute systematic awareness of body sensations.',
+    duration: 10,
+    skillId: '',
+    emotion: 'CALM',
+    instructions: [
+      'Find a comfortable seated position',
+      'Close your eyes',
+      'Move attention from head to toes',
+      'Notice sensations without judgment',
+      'Return attention when it wanders'
+    ]
+  },
+  {
+    name: 'Reframing Practice',
+    description: 'Practice reframing negative situations in a positive light.',
+    duration: 15,
+    skillId: '',
+    emotion: 'OPTIMISTIC',
+    instructions: [
+      'Write down a challenging situation',
+      'Identify your negative frame',
+      'Brainstorm 3 alternative frames',
+      'Choose the most helpful one',
+      'Notice how your perspective shifts'
+    ]
+  },
+  {
+    name: 'The "Not-To-Do" List',
+    description: 'Make a list of things you commit to NOT doing today.',
+    duration: 10,
+    skillId: '',
+    emotion: 'FOCUSED',
+    instructions: [
+      'Review your typical day',
+      'Identify time-wasters',
+      'List things you won\'t do today',
+      'Set boundaries with others',
+      'Protect your attention fiercely'
+    ]
+  },
+  {
+    name: 'Gratitude Countdown',
+    description: 'List 10 things you\'re grateful for, from general to specific.',
+    duration: 10,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Start with something broad (health, home)',
+      'Work toward more specific',
+      'Include people, opportunities, moments',
+      'Feel the gratitude physically',
+      'Carry this feeling forward'
+    ]
+  },
+  {
+    name: 'Resistance Labeling',
+    description: 'When you procrastinate, identify what emotion you\'re avoiding.',
+    duration: 5,
+    skillId: '',
+    emotion: 'COURAGEOUS',
+    instructions: [
+      'Notice procrastination urge',
+      'Ask "what emotion am I avoiding?"',
+      'Name the emotion (fear, boredom, confusion)',
+      'Acknowledge it with compassion',
+      'Take one small action anyway'
+    ]
+  },
+  {
+    name: 'Evening Reflection',
+    description: 'End each day with a structured review of what went well.',
+    duration: 10,
+    skillId: '',
+    emotion: 'GRATEFUL',
+    instructions: [
+      'Set aside 10 minutes before bed',
+      'Write 3 things that went well today',
+      'Note one thing you learned',
+      'Identify one thing to improve tomorrow',
+      'End with self-compassion'
+    ]
+  }
+]
+
+async function main() {
+  console.log('🌱 Starting seed...')
+
+  // Create admin user
+  const hashedPassword = await bcrypt.hash('admin123', 10)
+  const admin = await prisma.user.upsert({
+    where: { email: 'admin@metaskills.ai' },
+    update: {},
+    create: {
+      email: 'admin@metaskills.ai',
+      name: 'Admin User',
+      password: hashedPassword,
+    }
+  })
+  console.log('✅ Admin user created')
+
+  // Create meta-skills
+  console.log('📝 Creating meta-skills...')
+  const createdSkills = []
+  for (const skill of metaSkills) {
+    const created = await prisma.metaSkill.upsert({
+      where: { name: skill.name },
+      update: {},
+      create: skill
+    })
+    createdSkills.push(created)
+  }
+  console.log(`✅ Created ${createdSkills.length} meta-skills`)
+
+  // Create practices
+  console.log('💪 Creating practices...')
+  // Map practices to skills
+  const cognitiveSkills = createdSkills.filter(s => s.domain === Domain.COGNITIVE)
+  const interpersonalSkills = createdSkills.filter(s => s.domain === Domain.INTERPERSONAL)
+  const selfSkills = createdSkills.filter(s => s.domain === Domain.SELF)
+
+  let practiceIndex = 0
+  const skillPracticeMap = [
+    ...cognitiveSkills.flatMap(skill => [
+      practices[practiceIndex++], practices[practiceIndex++]
+    ]),
+    ...interpersonalSkills.flatMap(skill => [
+      practices[practiceIndex++], practices[practiceIndex++]
+    ]),
+    ...selfSkills.flatMap(skill => [
+      practices[practiceIndex++], practices[practiceIndex++],
+      practices[practiceIndex++]
+    ])
+  ]
+
+  for (let i = 0; i < Math.min(practices.length, skillPracticeMap.length); i++) {
+    const practice = practices[i]
+    const skill = skillPracticeMap[i]
+
+    await prisma.practice.upsert({
+      where: { name: practice.name },
+      update: {},
+      create: {
+        ...practice,
+        skillId: skill.id
+      }
+    })
+  }
+  console.log(`✅ Created ${Math.min(practices.length, skillPracticeMap.length)} practices`)
+
+  console.log('🎉 Seed completed successfully!')
+}
+
+main()
+  .catch((e) => {
+    console.error('❌ Seed failed:')
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })
