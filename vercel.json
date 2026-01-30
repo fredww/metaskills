@@ -4,19 +4,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "env": {
-    "NEXTAUTH_URL": {
-      "description": "The URL of your deployment"
-    }
-  },
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_SITE_URL": {
-        "description": "The public URL of your site",
-        "value": "https://$VERCEL_URL"
-      }
-    }
-  },
   "functions": {
     "api/**/*.ts": {
       "maxDuration": 30
