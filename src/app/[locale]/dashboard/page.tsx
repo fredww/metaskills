@@ -294,15 +294,15 @@ export default async function DashboardPage() {
                         <p className="text-sm text-gray-600 mb-2">
                           {skillTitle}
                         </p>
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <span>⏱️ {completion.practice.duration} min</span>
-                      {completion.rating && (
-                        <span>⭐ {completion.rating}/5</span>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <span>⏱️ {completion.practice.duration} min</span>
+                          {completion.rating && (
+                            <span>⭐ {completion.rating}/5</span>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
             </div>
           </div>
         )}
