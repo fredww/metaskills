@@ -26,6 +26,10 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  // Referral system fields
+  referralCode    String?   @unique
+  totalEarnings   Decimal   @default(0) @db.Decimal(10, 2)
+
   // Relations
   assessments     Assessment[]
   journalEntries  JournalEntry[]
@@ -38,6 +42,12 @@ model User {
   resourceComments ResourceComment[]
   challengeEnrollments ChallengeEnrollment[]
   abTestAssignments ABTestAssignment[]
+
+  // Referral relations
+  referralsGiven  UserReferral[]  @relation("Referrer")
+  referralsReceived UserReferral[] @relation("Referred")
+  conversions     AffiliateConversion[]
+  payouts         AffiliatePayout[]
 
   @@map("users")
 }
@@ -637,4 +647,98 @@ enum ConversionType {
   RATE
   COMMENT
   ENGAGEMENT
+}
+
+// ============================================================================
+// Affiliate & Referral System
+// ============================================================================
+
+model UserReferral {
+  id            String        @id @default(cuid())
+  referrerId    String
+  referrer      User          @relation("Referrer", fields: [referrerId], references: [id])
+  referredId    String        @unique
+  referred      User          @relation("Referred", fields: [referredId], references: [id])
+
+  referralCode  String        @unique
+  status        ReferralStatus @default(PENDING)
+  commissionRate Decimal      @default(30.00) @db.Decimal(4, 2)
+
+  createdAt     DateTime      @default(now())
+  activatedAt   DateTime?
+
+  conversions   AffiliateConversion[]
+
+  @@index([referrerId, status])
+  @@index([referralCode])
+  @@map("user_referrals")
+}
+
+model AffiliateConversion {
+  id            String        @id @default(cuid())
+  userId        String?
+  user          User?         @relation(fields: [userId], references: [id])
+
+  resourceUrl   String
+  resourceType  ResourceType
+  asin          String?
+
+  referralCode  String?
+  referral      UserReferral? @relation(fields: [referralCode], references: [referralCode])
+
+  clickId       String?       // UUID for tracking
+
+  converted     Boolean       @default(false)
+  orderId       String?
+  commissionAmount Decimal?    @db.Decimal(10, 2)
+  userShare     Decimal?      @db.Decimal(10, 2)
+  platformShare Decimal?      @db.Decimal(10, 2)
+
+  clickedAt     DateTime      @default(now())
+  convertedAt   DateTime?
+  reportedAt    DateTime?
+
+  metadata      Json?
+
+  @@index([userId, clickedAt])
+  @@index([referralCode, converted])
+  @@index([asin, converted])
+  @@map("affiliate_conversions")
+}
+
+model AffiliatePayout {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+
+  amount        Decimal       @db.Decimal(10, 2)
+  status        PayoutStatus  @default(PENDING)
+
+  payoutMethod  String?       // paypal, bank_transfer, alipay, wechat
+  payoutDetails Json?
+
+  requestedAt   DateTime      @default(now())
+  processedAt   DateTime?
+  paidAt        DateTime?
+
+  transactionId String?
+  notes         String?       @db.Text
+  metadata      Json?
+
+  @@index([userId, status])
+  @@index([status, requestedAt])
+  @@map("affiliate_payouts")
+}
+
+enum ReferralStatus {
+  PENDING    // Just registered, haven't made first purchase
+  ACTIVE     // Activated (made first purchase or completed action)
+  COMPLETED  // Relationship ended (optional)
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
 }
