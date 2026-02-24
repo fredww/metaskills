@@ -12,22 +12,33 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
 
   const article = await prisma.article.findUnique({
-    where: { slug, isPublished: true }
+    where: { slug, isPublished: true },
+    include: {
+      translations: {
+        where: {
+          locale: 'en',
+          isPublished: true
+        },
+        take: 1
+      }
+    }
   })
 
-  if (!article) {
+  if (!article || !article.translations[0]) {
     return {
       title: 'Article Not Found',
     }
   }
 
+  const translation = article.translations[0]
+
   return {
-    title: `${article.title} - MetaSkills Blog`,
-    description: article.excerpt.slice(0, 160),
-    keywords: [article.type.toLowerCase(), article.skillCode || 'meta-skills', 'learning', 'personal development', article.category],
+    title: `${translation.title} - MetaSkills Blog`,
+    description: translation.excerpt.slice(0, 160),
+    keywords: [article.type.toLowerCase(), article.skillCode || 'meta-skills', 'learning', 'personal development', article.category].filter(Boolean),
     openGraph: {
-      title: article.title,
-      description: article.excerpt.slice(0, 160),
+      title: translation.title,
+      description: translation.excerpt.slice(0, 160),
       type: 'article',
       publishedTime: article.publishedAt?.toISOString(),
       authors: [article.authorName],
@@ -37,14 +48,14 @@ export async function generateMetadata({ params }: PageProps) {
           url: article.coverImage || `/og-images/articles/${slug}.png`,
           width: 1200,
           height: 630,
-          alt: article.title,
+          alt: translation.title,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt.slice(0, 160),
+      title: translation.title,
+      description: translation.excerpt.slice(0, 160),
       images: [article.coverImage || `/og-images/articles/${slug}.png`],
     },
     alternates: {
@@ -57,12 +68,23 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const { slug } = await params
 
   const article = await prisma.article.findUnique({
-    where: { slug, isPublished: true }
+    where: { slug, isPublished: true },
+    include: {
+      translations: {
+        where: {
+          locale: 'en',
+          isPublished: true
+        },
+        take: 1
+      }
+    }
   })
 
-  if (!article) {
+  if (!article || !article.translations[0]) {
     notFound()
   }
+
+  const translation = article.translations[0]
 
   // Increment view count
   await prisma.article.update({
@@ -74,8 +96,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: article.title,
-    description: article.excerpt,
+    headline: translation.title,
+    description: translation.excerpt,
     image: article.coverImage || `/og-images/articles/${slug}.png`,
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
@@ -130,7 +152,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-[#2D2D2D] mb-4">
-            {article.title}
+            {translation.title}
           </h1>
 
           <div className="flex items-center gap-6 text-sm text-gray-600">
@@ -156,11 +178,11 @@ export default async function ArticleDetailPage({ params }: PageProps) {
           <CardContent className="p-8">
             <div className="prose prose-lg max-w-none">
               <p className="text-xl text-gray-700 italic mb-8 leading-relaxed">
-                {article.excerpt}
+                {translation.excerpt}
               </p>
 
               <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
-                {article.content}
+                {translation.content}
               </div>
             </div>
           </CardContent>
