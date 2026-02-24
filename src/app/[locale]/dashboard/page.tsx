@@ -27,7 +27,7 @@ async function getUserProgress(userId: string) {
         skill: {
           include: {
             translations: {
-              where: { locale: 'en', isPublished: true }
+              where: { locale: 'en', status: 'PUBLISHED' }
             }
           }
         }
@@ -51,12 +51,12 @@ async function getRecentPracticeCompletions(userId: string) {
             skill: {
               include: {
                 translations: {
-                  where: { locale: 'en', isPublished: true }
+                  where: { locale: 'en', status: 'PUBLISHED' }
                 }
               }
             },
             translations: {
-              where: { locale: 'en', isPublished: true }
+              where: { locale: 'en', status: 'PUBLISHED' }
             }
           }
         }
@@ -81,12 +81,12 @@ async function getPracticeStatsBySkill(userId: string) {
             skill: {
               include: {
                 translations: {
-                  where: { locale: 'en', isPublished: true }
+                  where: { locale: 'en', status: 'PUBLISHED' }
                 }
               }
             },
             translations: {
-              where: { locale: 'en', isPublished: true }
+              where: { locale: 'en', status: 'PUBLISHED' }
             }
           }
         }
@@ -96,7 +96,7 @@ async function getPracticeStatsBySkill(userId: string) {
     // Count completions by skill
     const skillCounts: Record<string, number> = {}
     completions.forEach(completion => {
-      const skillTitle = completion.practice.skill.translations[0]?.title || completion.practice.skill.code
+      const skillTitle = completion.practice.skill.translations[0]?.title || completion.practice.skill.code || 'Unknown Skill'
       skillCounts[skillTitle] = (skillCounts[skillTitle] || 0) + 1
     })
 
@@ -277,7 +277,7 @@ export default async function DashboardPage() {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {practiceCompletions.slice(0, 6).map((completion) => {
-                  const practiceTitle = completion.practice.translations[0]?.title || completion.practice.code
+                  const practiceTitle = completion.practice.translations[0]?.title || `Practice ${completion.practice.id.slice(0, 6)}`
                   const skillTitle = completion.practice.skill.translations[0]?.title || completion.practice.skill.code
                   return (
                     <Card key={completion.id} className="border-[#E5E0D8]">
@@ -302,10 +302,11 @@ export default async function DashboardPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Quick Actions */}
         <div>
