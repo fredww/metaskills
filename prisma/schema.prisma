@@ -1,5 +1,5 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -107,33 +107,70 @@ model Assessment {
 }
 
 // ============================================================================
-// Meta-Skills & Content
+// Meta-Skills & Content (with Translation Tables)
 // ============================================================================
 
 model MetaSkill {
   id          String   @id @default(cuid())
   code        String   @unique // e.g., "critical-thinking"
-  title       String
+
+  // Immutable properties (not translated)
   domain      Domain   // COGNITIVE, INTERPERSONAL, SELF
   stage       Int      // 1-5
+  order       Int      // For sorting within domain
 
-  // Content
-  description String   @db.Text
-  definition  String   @db.Text
-  whyImportant String  @db.Text
-  lifeApplications Json // Array of application examples
-  scientificBackground String? @db.Text
+  // JSON metadata (kept for flexibility)
+  lifeApplications Json @default("[]") // Application examples
 
   // Metadata
-  order       Int      // For sorting within domain
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
+  translations MetaSkillTranslation[]
   practices   Practice[]
   userProgress UserProgress[]
 
+  @@index([domain, order])
   @@map("meta_skills")
+}
+
+model MetaSkillTranslation {
+  id          String   @id @default(cuid())
+
+  // Foreign key
+  skillId     String
+  skill       MetaSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  // Locale and status
+  locale      String   // 'en', 'zh-CN', 'de', etc.
+  status      TranslationStatus @default(DRAFT)
+
+  // Translatable content
+  title       String
+  description String   @db.Text
+  definition  String   @db.Text
+  whyImportant String  @db.Text
+
+  // SEO content
+  metaTitle       String?
+  metaDescription String?  @db.Text
+  ogTitle         String?
+  ogDescription   String?  @db.Text
+
+  // Workflow tracking
+  translatedBy String?  // User ID or translator name
+  reviewedBy   String?
+  approvedAt   DateTime?
+  publishedAt  DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([skillId, locale])
+  @@index([locale, status])
+  @@index([status, publishedAt])
+  @@map("meta_skill_translations")
 }
 
 enum Domain {
@@ -142,31 +179,65 @@ enum Domain {
   SELF
 }
 
+enum TranslationStatus {
+  DRAFT       // Translation in progress
+  PENDING     // Awaiting review
+  REVIEWED    // Reviewed, awaiting approval
+  PUBLISHED   // Live
+  ARCHIVED    // Old version
+}
+
 model Practice {
   id          String   @id @default(cuid())
-  title       String
-  description String   @db.Text
 
-  // Metadata
-  duration    Int      // in minutes
-  difficulty  Difficulty // BEGINNER, INTERMEDIATE, ADVANCED
-  emotionTone Emotion  // CALM, ENERGIZING, REFLECTIVE, CHALLENGING
-
-  // Content
-  instructions Json    // Step-by-step instructions
-  benefits    String[]
-  tips        String[]
-
-  // Relations
   skillId     String
   skill       MetaSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
 
+  // Immutable metadata
+  duration    Int      // in minutes
+  difficulty  Difficulty
+  emotionTone Emotion
+  order       Int      @default(0)
+
+  // Relations
+  translations PracticeTranslation[]
   completions PracticeCompletion[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  @@index([skillId, difficulty])
   @@map("practices")
+}
+
+model PracticeTranslation {
+  id          String   @id @default(cuid())
+
+  practiceId  String
+  practice    Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+
+  locale      String
+  status      TranslationStatus @default(DRAFT)
+
+  // Translatable content
+  title       String
+  description String   @db.Text
+  instructions Json    // Step-by-step instructions
+  benefits    String[] // Array of benefits
+  tips        String[] // Array of tips
+
+  // Workflow
+  translatedBy String?
+  reviewedBy   String?
+  approvedAt   DateTime?
+  publishedAt  DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([practiceId, locale])
+  @@index([locale, status])
+  @@map("practice_translations")
 }
 
 enum Difficulty {
@@ -180,6 +251,84 @@ enum Emotion {
   ENERGIZING
   REFLECTIVE
   CHALLENGING
+}
+
+// ============================================================================
+// Articles with Translations
+// ============================================================================
+
+model Article {
+  id          String   @id @default(cuid())
+
+  slug        String   @unique
+  type        ArticleType
+  skillCode   String?
+
+  // Non-translated metadata
+  authorName  String
+  authorTitle String
+  authorImage String?
+  coverImage  String?
+  category    String?
+
+  views       Int      @default(0)
+  likes       Int      @default(0)
+
+  isPublished Boolean  @default(true) // Master publication switch
+  publishedAt DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  translations ArticleTranslation[]
+
+  @@index([type, skillCode, isPublished])
+  @@index([slug])
+  @@map("articles")
+}
+
+model ArticleTranslation {
+  id          String   @id @default(cuid())
+
+  articleId   String
+  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  locale      String
+  status      TranslationStatus @default(DRAFT)
+
+  // Translatable content
+  title       String
+  content     String   @db.Text
+  excerpt     String   @db.Text
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?  @db.Text
+  ogTitle         String?
+  ogDescription   String?  @db.Text
+
+  // Locale-specific publication
+  isPublished Boolean  @default(false)
+  publishedAt  DateTime?
+
+  // Workflow
+  translatedBy String?
+  reviewedBy   String?
+  approvedAt   DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([articleId, locale])
+  @@index([locale, status, isPublished])
+  @@map("article_translations")
+}
+
+enum ArticleType {
+  EXPERT_INTERVIEW
+  LEARNING_INSIGHTS
+  SUCCESS_STORY
+  RESEARCH_SUMMARY
 }
 
 // ============================================================================
@@ -258,14 +407,14 @@ model ResourceClick {
   userId      String
 
   // Resource details
-  resourceType ResourceType // BOOK, TOOL, COURSE
+  resourceType ResourceType
   resourceTitle String
   resourceUrl   String
-  skillCode     String   // Which skill this resource is related to
+  skillCode     String
 
   // Click context
-  clickSource  ClickSource // SKILL_PAGE, PRACTICE_MODAL, DASHBOARD
-  metadata     Json?     // Additional context (e.g., practiceId if from modal)
+  clickSource  ClickSource
+  metadata     Json?
 
   clickedAt   DateTime @default(now())
 
@@ -300,15 +449,11 @@ model ResourceRating {
   id          String   @id @default(cuid())
   userId      String
 
-  // Resource identification
   resourceType ResourceType
-  resourceUrl  String   // Use URL as unique identifier for external resources
+  resourceUrl  String
   skillCode    String
 
-  // Rating
   rating       Int      // 1-5 stars
-
-  // Optional review text
   review       String?  @db.Text
 
   createdAt   DateTime @default(now())
@@ -327,20 +472,16 @@ model ResourceComment {
   id          String   @id @default(cuid())
   userId      String
 
-  // Resource identification
   resourceType ResourceType
   resourceUrl  String
   skillCode    String
 
-  // Comment
   content     String   @db.Text
 
-  // Thread support
   parentId    String?
   parent      ResourceComment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   replies     ResourceComment[] @relation("CommentReplies")
 
-  // Engagement
   likes       Int      @default(0)
 
   createdAt   DateTime @default(now())
@@ -361,21 +502,17 @@ model ResourceComment {
 model Challenge {
   id          String   @id @default(cuid())
 
-  // Challenge details
   title       String
   description String   @db.Text
   type        ChallengeType
 
-  // Requirements
-  targetCount Int      // Number of books/tools to complete
-  timeframe   Int      // Days to complete
-  skillCode   String?  // Optional: skill-specific challenge
+  targetCount Int
+  timeframe   Int
+  skillCode   String?
 
-  // Rewards
   badgeUrl    String?
   badgeTitle  String?
 
-  // Status
   isActive    Boolean  @default(true)
   startDate   DateTime?
   endDate     DateTime?
@@ -383,7 +520,6 @@ model Challenge {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relations
   enrollments ChallengeEnrollment[]
 
   @@index([type, isActive])
@@ -396,18 +532,14 @@ model ChallengeEnrollment {
   userId      String
   challengeId String
 
-  // Progress
   startedAt   DateTime @default(now())
   completedAt DateTime?
-  progress    Int      @default(0) // Number of books/tools completed
-
-  // Resources tracked in this challenge
-  resourceUrls String[] // Array of resource URLs completed
+  progress    Int      @default(0)
+  resourceUrls String[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relations
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
 
@@ -424,81 +556,29 @@ enum ChallengeType {
 }
 
 // ============================================================================
-// Expert Interviews & Articles
-// ============================================================================
-
-model Article {
-  id          String   @id @default(cuid())
-
-  // Content
-  title       String
-  slug        String   @unique
-  content     String   @db.Text
-  excerpt     String   @db.Text
-
-  // Metadata
-  type        ArticleType
-  skillCode   String?
-  authorName  String
-  authorTitle String
-  authorImage String?
-
-  // Media
-  coverImage  String?
-  category    String?
-
-  // Engagement
-  views       Int      @default(0)
-  likes       Int      @default(0)
-
-  // Status
-  isPublished Boolean  @default(true)
-  publishedAt DateTime?
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([type, skillCode, isPublished])
-  @@index([slug])
-  @@map("articles")
-}
-
-enum ArticleType {
-  EXPERT_INTERVIEW
-  LEARNING_INSIGHTS
-  SUCCESS_STORY
-  RESEARCH_SUMMARY
-}
-
-// ============================================================================
 // A/B Testing System
 // ============================================================================
 
 model ABTest {
   id          String   @id @default(cuid())
 
-  // Test details
   name        String
   description String?  @db.Text
   isActive    Boolean  @default(true)
 
-  // Test configuration
-  trafficAllocation Int @default(50) // Percentage for variant A (rest goes to B)
+  trafficAllocation Int @default(50)
   startDate   DateTime @default(now())
   endDate     DateTime?
 
-  // What we're testing
-  testType    TestType // RESOURCE_LAYOUT, CTA_POSITION, THUMBNAIL_SIZE
-  testContext String   // Where the test runs (e.g., "skill-page", "resources-list")
+  testType    TestType
+  testContext String
 
-  // Variant configurations (JSON)
-  variantA    Json     // Configuration for control group
-  variantB    Json     // Configuration for test group
+  variantA    Json
+  variantB    Json
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Relations
   assignments ABTestAssignment[]
 
   @@index([isActive, startDate])
@@ -510,18 +590,14 @@ model ABTestAssignment {
   id          String   @id @default(cuid())
   userId      String?
 
-  // Which test
   testId      String
   test        ABTest   @relation(fields: [testId], references: [id], onDelete: Cascade)
 
-  // Assigned variant
-  variant     String   // "A" or "B"
+  variant     String
 
-  // Assignment metadata
   sessionId   String?
   assignedAt  DateTime @default(now())
 
-  // Relations
   user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   conversions ABTestConversion[]
 
@@ -533,12 +609,10 @@ model ABTestAssignment {
 model ABTestConversion {
   id          String   @id @default(cuid())
 
-  // Which assignment
   assignmentId String
   assignment   ABTestAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
 
-  // Conversion details
-  conversionType ConversionType // CLICK, VIEW, RATE, COMMENT
+  conversionType ConversionType
   resourceUrl   String?
   metadata      Json?
 
@@ -558,9 +632,9 @@ enum TestType {
 }
 
 enum ConversionType {
-  CLICK       // User clicked on a resource
-  VIEW        // User viewed resource details
-  RATE        // User rated a resource
-  COMMENT     // User commented on a resource
-  ENGAGEMENT  // Any meaningful engagement
+  CLICK
+  VIEW
+  RATE
+  COMMENT
+  ENGAGEMENT
 }
