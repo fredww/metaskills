@@ -1,0 +1,206 @@
+// ============================================================================
+// UPDATED SCHEMA WITH TRANSLATABLE CONTENT
+// ============================================================================
+
+model MetaSkill {
+  id          String   @id @default(cuid())
+  code        String   @unique // e.g., "critical-thinking"
+  domain      Domain   // COGNITIVE, INTERPERSONAL, SELF
+  stage       Int      // 1-5
+  order       Int      // For sorting within domain
+
+  // Translatable content (stored as JSON)
+  title_translations       Json   @default("{}") // {"en": "...", "zh-CN": "..."}
+  description_translations Json   @db.Text @default("{}")
+  definition_translations   Json   @db.Text @default("{}")
+  why_important_translations Json @db.Text @default("{}")
+  life_applications        Json   @default("[]") // Kept as JSON, not translated
+
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  practices   Practice[]
+  userProgress UserProgress[]
+
+  @@index([domain, order])
+  @@map("meta_skills")
+}
+
+model Practice {
+  id          String   @id @default(cuid())
+
+  // Metadata (not translated)
+  skillId     String
+  skill       MetaSkill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  duration    Int      // in minutes
+  difficulty  Difficulty
+  emotionTone Emotion
+
+  // Translatable content
+  title_translations       Json   @default("{}")
+  description_translations Json   @db.Text @default("{}")
+  instructions_translations Json  @default("{}")
+  benefits_translations    Json   @default("[]") // Array of translations
+  tips_translations        Json   @default("[]")
+
+  completions PracticeCompletion[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([skillId, difficulty])
+  @@map("practices")
+}
+
+model Article {
+  id          String   @id @default(cuid())
+
+  // Metadata (not translated)
+  slug        String   @unique
+  type        ArticleType
+  skillCode   String?
+
+  // Translatable content
+  title_translations Json   @default("{}")
+  content_translations Json  @db.Text @default("{}")
+  excerpt_translations Json  @db.Text @default("{}")
+
+  // Non-translated metadata
+  authorName  String
+  authorTitle String
+  authorImage String?
+  coverImage  String?
+  category    String?
+
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  isPublished Boolean  @default(true)
+  publishedAt DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([type, skillCode, isPublished])
+  @@index([slug])
+  @@map("articles")
+}
+
+// ============================================================================
+// Helper functions for querying translations
+// ============================================================================
+
+// Example TypeScript utility:
+// lib/translations.ts
+
+export interface Translations {
+  en: string;
+  'zh-CN'?: string;
+  de?: string;
+  ja?: string;
+  fr?: string;
+  es?: string;
+  ko?: string;
+}
+
+export function getTranslation(
+  translations: Record<string, string> | Translations,
+  locale: string,
+  fallback: string = ''
+): string {
+  if (typeof translations === 'object' && translations !== null) {
+    return translations[locale] || translations['en'] || fallback;
+  }
+  return fallback;
+}
+
+// Example usage in API route:
+// app/api/skills/route.ts
+
+import { prisma } from '@/lib/prisma';
+import { getTranslation } from '@/lib/translations';
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const locale = searchParams.get('locale') || 'en';
+
+  const skills = await prisma.metaSkill.findMany({
+    orderBy: [
+      { domain: 'asc' },
+      { order: 'asc' }
+    ]
+  });
+
+  const localizedSkills = skills.map(skill => ({
+    code: skill.code,
+    domain: skill.domain,
+    stage: skill.stage,
+    title: getTranslation(skill.title_translations, locale, skill.code),
+    description: getTranslation(skill.description_translations, locale),
+    definition: getTranslation(skill.definition_translations, locale),
+    whyImportant: getTranslation(skill.why_important_translations, locale),
+  }));
+
+  return Response.json(localizedSkills);
+}
+
+// ============================================================================
+// Seed script example: prisma/seed-translations.ts
+// ============================================================================
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+const skillsData = [
+  {
+    code: 'critical-thinking',
+    domain: 'COGNITIVE',
+    stage: 3,
+    order: 1,
+    title_translations: {
+      en: 'Critical Thinking',
+      'zh-CN': '批判性思维',
+      de: 'Kritisches Denken',
+      ja: '批判的思考',
+      fr: 'Esprit Critique',
+      es: 'Pensamiento Crítico',
+      ko: '비판적 사고'
+    },
+    description_translations: {
+      en: 'Objective analysis and evaluation to form judgments',
+      'zh-CN': '客观分析和评估以形成判断',
+      de: 'Objektive Analyse und Bewertung zur Urteilsbildung',
+      ja: '判断を形成するための客観的な分析と評価',
+      fr: 'Analyse objective et évaluation pour former des jugements',
+      es: 'Análisis y evaluación objetivos para formar juicios',
+      ko: '판단을 형성하기 위한 객관적 분석 및 평가'
+    },
+    definition_translations: {
+      en: 'The ability to think clearly and rationally, understanding the logical connection between ideas.',
+      'zh-CN': '清晰理性地思考，理解观点之间逻辑联系的能力。',
+      // ... other languages
+    },
+    why_important_translations: {
+      en: 'Critical thinking is crucial for making informed decisions and solving complex problems.',
+      'zh-CN': '批判性思维对于做出明智决策和解决复杂问题至关重要。',
+      // ... other languages
+    }
+  },
+  // ... more skills
+];
+
+async function main() {
+  for (const skill of skillsData) {
+    await prisma.metaSkill.upsert({
+      where: { code: skill.code },
+      update: skill,
+      create: skill
+    });
+  }
+}
+
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());
