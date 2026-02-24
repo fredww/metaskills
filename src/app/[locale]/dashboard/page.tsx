@@ -24,7 +24,13 @@ async function getUserProgress(userId: string) {
     const progress = await prisma.userProgress.findMany({
       where: { userId },
       include: {
-        skill: true
+        skill: {
+          include: {
+            translations: {
+              where: { locale: 'en', isPublished: true }
+            }
+          }
+        }
       },
       take: 8
     })
@@ -41,7 +47,18 @@ async function getRecentPracticeCompletions(userId: string) {
       where: { userId },
       include: {
         practice: {
-          include: { skill: true }
+          include: {
+            skill: {
+              include: {
+                translations: {
+                  where: { locale: 'en', isPublished: true }
+                }
+              }
+            },
+            translations: {
+              where: { locale: 'en', isPublished: true }
+            }
+          }
         }
       },
       orderBy: { completedAt: 'desc' },
@@ -60,7 +77,18 @@ async function getPracticeStatsBySkill(userId: string) {
       where: { userId },
       include: {
         practice: {
-          include: { skill: true }
+          include: {
+            skill: {
+              include: {
+                translations: {
+                  where: { locale: 'en', isPublished: true }
+                }
+              }
+            },
+            translations: {
+              where: { locale: 'en', isPublished: true }
+            }
+          }
         }
       }
     })
@@ -68,7 +96,7 @@ async function getPracticeStatsBySkill(userId: string) {
     // Count completions by skill
     const skillCounts: Record<string, number> = {}
     completions.forEach(completion => {
-      const skillTitle = completion.practice.skill.title
+      const skillTitle = completion.practice.skill.translations[0]?.title || completion.practice.skill.code
       skillCounts[skillTitle] = (skillCounts[skillTitle] || 0) + 1
     })
 
@@ -166,12 +194,13 @@ export default async function DashboardPage() {
             {userProgress.length > 0 ? (
               <div className="space-y-3">
                 {userProgress.slice(0, 4).map((progress) => {
-                  const practiceCount = practiceStats[progress.skill.title] || 0
+                  const skillTitle = progress.skill.translations[0]?.title || progress.skill.code
+                  const practiceCount = practiceStats[skillTitle] || 0
                   return (
                     <div key={progress.id} className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm text-[#2D2D2D]">{progress.skill.title}</span>
+                          <span className="text-sm text-[#2D2D2D]">{skillTitle}</span>
                           {practiceCount > 0 && (
                             <span className="text-xs px-2 py-0.5 bg-[#D4AF37]/20 text-[#D4AF37] rounded-full">
                               {practiceCount} {practiceCount === 1 ? 'practice' : 'practices'}
@@ -247,21 +276,24 @@ export default async function DashboardPage() {
               Recent Practice Activity
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {practiceCompletions.slice(0, 6).map((completion) => (
-                <Card key={completion.id} className="border-[#E5E0D8]">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <span className="text-2xl">💪</span>
-                      <span className="text-xs text-gray-500">
-                        {new Date(completion.completedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <h3 className="font-semibold text-[#2D2D2D] mb-1">
-                      {completion.practice.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {completion.practice.skill.title}
-                    </p>
+              {practiceCompletions.slice(0, 6).map((completion) => {
+                  const practiceTitle = completion.practice.translations[0]?.title || completion.practice.code
+                  const skillTitle = completion.practice.skill.translations[0]?.title || completion.practice.skill.code
+                  return (
+                    <Card key={completion.id} className="border-[#E5E0D8]">
+                      <CardContent className="p-6">
+                        <div className="flex items-start justify-between mb-3">
+                          <span className="text-2xl">💪</span>
+                          <span className="text-xs text-gray-500">
+                            {new Date(completion.completedAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <h3 className="font-semibold text-[#2D2D2D] mb-1">
+                          {practiceTitle}
+                        </h3>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {skillTitle}
+                        </p>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
                       <span>⏱️ {completion.practice.duration} min</span>
                       {completion.rating && (

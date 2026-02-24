@@ -58,7 +58,12 @@ export async function POST(request: Request) {
 
     // Find the skill in the database
     const skill = await prisma.metaSkill.findFirst({
-      where: { code: skillCode }
+      where: { code: skillCode },
+      include: {
+        translations: {
+          where: { locale: 'en', isPublished: true }
+        }
+      }
     })
 
     if (!skill) {
@@ -164,7 +169,7 @@ export async function POST(request: Request) {
           id: completion.id,
           practiceId: completion.practiceId,
           completedAt: completion.completedAt,
-          skillTitle: skill.title
+          skillTitle: skill.translations[0]?.title || skill.code
         }
       },
       { status: 201 }
@@ -205,7 +210,18 @@ export async function GET(request: Request) {
       where: { userId: user.id },
       include: {
         practice: {
-          include: { skill: true }
+          include: {
+            skill: {
+              include: {
+                translations: {
+                  where: { locale: 'en', isPublished: true }
+                }
+              }
+            },
+            translations: {
+              where: { locale: 'en', isPublished: true }
+            }
+          }
         }
       },
       orderBy: { completedAt: 'desc' },

@@ -62,7 +62,17 @@ export async function POST(request: Request) {
         if (!dbSkillName) continue
 
         const skill = await prisma.metaSkill.findFirst({
-          where: { title: dbSkillName }
+          where: {
+            OR: [
+              { title: dbSkillName },
+              { code: dbSkillName.toLowerCase().replace(/\s+/g, '-') }
+            ]
+          },
+          include: {
+            translations: {
+              where: { locale: 'en', isPublished: true }
+            }
+          }
         })
 
         if (skill) {

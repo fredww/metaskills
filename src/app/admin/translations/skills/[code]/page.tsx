@@ -44,7 +44,12 @@ async function updateTranslation(code: string, locale: string, data: any) {
   'use server'
 
   const skill = await prisma.metaSkill.findUnique({
-    where: { code }
+    where: { code },
+    include: {
+      translations: {
+        where: { locale: 'en', isPublished: true }
+      }
+    }
   })
 
   if (!skill) {
@@ -156,12 +161,12 @@ export default async function SkillTranslationEditorPage({
           <CardContent className="space-y-4">
             <div>
               <Label className="text-blue-900 font-semibold">标题</Label>
-              <p className="text-gray-800 mt-1">{englishTranslation?.title || skill.title}</p>
+              <p className="text-gray-800 mt-1">{englishTranslation?.title || skill.translations[0]?.title || skill.code}</p>
             </div>
             <div>
               <Label className="text-blue-900 font-semibold">描述</Label>
               <p className="text-gray-800 mt-1 whitespace-pre-wrap">
-                {englishTranslation?.description || skill.description}
+                {englishTranslation?.description || skill.translations[0]?.description || ''}
               </p>
             </div>
             <div>
