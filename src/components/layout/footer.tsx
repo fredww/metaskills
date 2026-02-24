@@ -1,6 +1,9 @@
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
+import { getTranslations } from 'next-intl/server'
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations('footer')
+
   return (
     <footer className="w-full border-t border-border/40 bg-background">
       <div className="container max-w-7xl mx-auto px-6 lg:px-8 py-12 md:py-16">
@@ -55,20 +58,20 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Learn abilities that never expire. Build a foundation for lifelong growth.
+              {t('tagline')}
             </p>
           </div>
 
           {/* Product */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Product</h3>
+            <h3 className="text-sm font-semibold">{t('links.product')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/assessment"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Assessment
+                  {t('items.assessment')}
                 </Link>
               </li>
               <li>
@@ -76,7 +79,7 @@ export function Footer() {
                   href="/skills"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Meta-Skills
+                  {t('items.skills')}
                 </Link>
               </li>
               <li>
@@ -84,7 +87,7 @@ export function Footer() {
                   href="/practices"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Practices
+                  {t('items.practices')}
                 </Link>
               </li>
               <li>
@@ -92,7 +95,7 @@ export function Footer() {
                   href="/pricing"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Pricing
+                  {t('items.pricing')}
                 </Link>
               </li>
             </ul>
@@ -100,14 +103,14 @@ export function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Company</h3>
+            <h3 className="text-sm font-semibold">{t('links.company')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/about"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  About
+                  {t('items.about')}
                 </Link>
               </li>
               <li>
@@ -115,7 +118,7 @@ export function Footer() {
                   href="/blog"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Blog
+                  {t('items.blog')}
                 </Link>
               </li>
               <li>
@@ -123,7 +126,7 @@ export function Footer() {
                   href="/contact"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Contact
+                  {t('items.contact')}
                 </Link>
               </li>
             </ul>
@@ -131,14 +134,14 @@ export function Footer() {
 
           {/* Legal */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Legal</h3>
+            <h3 className="text-sm font-semibold">{t('links.legal')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/privacy"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Privacy
+                  {t('items.privacy')}
                 </Link>
               </li>
               <li>
@@ -146,7 +149,7 @@ export function Footer() {
                   href="/terms"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Terms
+                  {t('items.terms')}
                 </Link>
               </li>
             </ul>
@@ -154,7 +157,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-border/40 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} MetaSkills.ai. All rights reserved.</p>
+          <p>{t('copyright')}</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "title": "MetaSkills - 学习永不过时的能力",
+    "description": "掌握批判性思维、情商和适应性等元技能。在快速变化的世界中，你终身的竞争优势。"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "skills": "技能",
+    "assessment": "评估",
+    "practices": "练习",
+    "journal": "日志",
+    "pricing": "定价",
+    "contact": "联系",
+    "login": "登录",
+    "signup": "注册",
+    "dashboard": "控制台",
+    "profile": "个人资料",
+    "logout": "退出"
+  },
+  "hero": {
+    "badge": "人类能力操作系统",
+    "title": "学习",
+    "titleHighlight": "永不过时的能力",
+    "subtitle": "在一个技术技能每5年就会过时的世界里，元技能——学习、思考、适应以及理解自己和他人——是你终身的竞争优势。",
+    "cta": {
+      "primary": "开始评估",
+      "secondary": "探索框架"
+    },
+    "trust": {
+      "evidence": "基于实证",
+      "privacy": "隐私优先",
+      "human": "以人为本"
+    }
+  },
+  "framework": {
+    "label": "框架",
+    "title": "三大系统，一个操作系统",
+    "subtitle": "所有人类能力都可以组织成三个相互关联的系统。这不是课程清单——这是人类潜能的地图。",
+    "cognitive": {
+      "title": "认知系统",
+      "description": "你如何理解世界、学习、思考和做决策。所有智力工作的基础。",
+      "skills": {
+        "learning": "学会学习",
+        "thinking": "批判性思维",
+        "systems": "系统思维",
+        "decision": "决策能力"
+      }
+    },
+    "interpersonal": {
+      "title": "人际系统",
+      "description": "你如何理解他人、建立关系、沟通、协作和应对社会复杂性。",
+      "skills": {
+        "emotional": "情商",
+        "communication": "沟通",
+        "empathy": "共情与换位思考",
+        "collaboration": "协作"
+      }
+    },
+    "self": {
+      "title": "自我系统",
+      "description": "你如何管理自己的内心世界——情绪、注意力、精力、动机和个人成长。",
+      "skills": {
+        "awareness": "自我意识",
+        "regulation": "情绪调节",
+        "resilience": "韧性与适应性",
+        "mindfulness": "正念与专注"
+      }
+    },
+    "viewComplete": "查看完整技能地图"
+  },
+  "why": {
+    "label": "为什么",
+    "title": "为什么元技能",
+    "titleHighlight": "比以往任何时候都更重要",
+    "subtitle": "我们正经历着前所未有的加速变革。一项 learned professional skill 的半衰期现在估计只有5年。",
+    "description": "虽然具体的工具和框架会不断演变，但学习、批判性思考、与他人联系和适应的基本人类能力只会增值。",
+    "benefits": {
+      "automation": {
+        "title": "让职业生涯自动化免疫",
+        "description": "AI擅长重复性任务。人类擅长细微之处、创造力和复杂判断。"
+      },
+      "wellbeing": {
+        "title": "为幸福感建立基础",
+        "description": "研究表明，韧性和自我意识等元技能与生活满意度密切相关。"
+      },
+      "universal": {
+        "title": "保持普遍相关性",
+        "description": "这些能力在每种文化、行业和角色中都被重视——现在和几十年后都是如此。"
+      }
+    },
+    "chart": {
+      "title": "技能价值随时间变化",
+      "technical": {
+        "label": "技术技能",
+        "trend": "↓ 下降",
+        "description": "随着技术进步失去相关性"
+      },
+      "meta": {
+        "label": "元技能",
+        "trend": "↑ 增长",
+        "description": "在整个职业生涯中价值复合增长"
+      },
+      "quote": "比竞争对手学得更快的能力是你唯一可持续的竞争优势。",
+      "attribution": "— Arie de Geus，壳牌战略前负责人"
+    }
+  },
+  "approach": {
+    "label": "方法",
+    "title": "不同的学习方式",
+    "subtitle": "这不是一个课程平台。这是一个平静的反思、练习和逐步成长的空间——没有压力，没有游戏化，没有比较。",
+    "microlearning": {
+      "emoji": "🌿",
+      "title": "微学习",
+      "description": "5-10分钟的练习。没有压倒性的课程。在一天的小时刻里学习。"
+    },
+    "nonLinear": {
+      "emoji": "🧭",
+      "title": "非线性路径",
+      "description": "跟随你的共鸣。没有规定的顺序。你的旅程是独一无二的。"
+    },
+    "practice": {
+      "emoji": "📓",
+      "title": "实践与反思",
+      "description": "仅靠知识无法改变。我们强调现实世界应用胜过理论。"
+    },
+    "ai": {
+      "emoji": "🤖",
+      "title": "AI引导的反思",
+      "description": "一个 thoughtful AI 伴侣帮助你看到模式，而不是开处方。永远是你的选择。"
+    },
+    "calm": {
+      "emoji": "🌙",
+      "title": "平静体验",
+      "description": "无分心界面。支持暗色模式。为专注设计，而非参与度指标。"
+    },
+    "longterm": {
+      "emoji": "🪴",
+      "title": "长期成长",
+      "description": "我们以年而不是天来衡量进步。没有连续记录，没有FOMO。可持续发展。"
+    }
+  },
+  "start": {
+    "label": "入口点",
+    "title": "从你所在的地方开始",
+    "subtitle": "无需准备。没有先决条件。只需做你自己，迈出一小步。",
+    "assessment": {
+      "title": "元技能评估",
+      "description": "花10分钟反思你当前的能力。获得个性化地图——而不是分数。",
+      "cta": "开始评估"
+    },
+    "practice": {
+      "title": "5分钟练习",
+      "description": "一个你现在可以做的简单、落地的练习。无需注册。",
+      "cta": "尝试练习"
+    },
+    "calm": {
+      "title": "平静学习模式",
+      "description": "进入我们无干扰的阅读和反思空间。没有跟踪，没有通知。",
+      "cta": "进入平静空间"
+    }
+  },
+  "philosophy": {
+    "label": "我们的理念",
+    "title": "这不是另一个让你更高效的平台",
+    "subtitle": "我们的存在是帮助你建立一个 grounded、adaptive 的内部系统——而不是像机器一样优化你。成长需要时间。反思是混乱的。这没关系。",
+    "believe": {
+      "title": "我们相信什么",
+      "awareness": "觉察比表现更重要",
+      "development": "发展比比较更重要",
+      "structure": "结构比分数更有价值",
+      "longterm": "长期成长胜过短期效率"
+    },
+    "reject": {
+      "title": "我们拒绝什么",
+      "hustle": "hustle 文化和倦怠",
+      "gamification": "激进的游戏化和成瘾",
+      "ranking": "排名、竞争和比较",
+      "optimization": "把人当作优化问题"
+    }
+  },
+  "footer": {
+    "tagline": "学习永不过时的能力。为终身成长建立基础。",
+    "links": {
+      "product": "产品",
+      "company": "公司",
+      "resources": "资源",
+      "legal": "法律"
+    },
+    "items": {
+      "assessment": "评估",
+      "skills": "元技能",
+      "practices": "练习",
+      "pricing": "价格",
+      "about": "关于",
+      "blog": "博客",
+      "contact": "联系",
+      "privacy": "隐私",
+      "terms": "条款"
+    },
+    "copyright": "© 2025 MetaSkills.ai. 保留所有权利。",
+    "madeWith": "用❤️为终身学习者制作"
+  },
+  "auth": {
+    "login": {
+      "title": "欢迎回来",
+      "subtitle": "登录以继续你的学习旅程",
+      "email": "邮箱地址",
+      "password": "密码",
+      "button": "登录",
+      "noAccount": "还没有账户？",
+      "signUp": "注册",
+      "forgotPassword": "忘记密码？"
+    },
+    "signup": {
+      "title": "创建你的账户",
+      "subtitle": "开始你的元技能掌握之旅",
+      "name": "全名",
+      "email": "邮箱地址",
+      "password": "密码",
+      "agree": "我同意",
+      "terms": "服务条款",
+      "privacy": "隐私政策",
+      "button": "创建账户",
+      "hasAccount": "已有账户？",
+      "login": "登录"
+    }
+  },
+  "assessment": {
+    "title": "发现你的元技能档案",
+    "subtitle": "完成我们的综合评估，了解你在认知、人际和自我管理领域的当前能力",
+    "start": "开始评估",
+    "duration": "大约需要15分钟",
+    "questions": "48个问题",
+    "flow": {
+      "questionOf": "问题 {current}/{total}",
+      "complete": "完成 {percent}%",
+      "back": "← 返回",
+      "skip": "跳过 →",
+      "ratingHint": "<strong>1</strong> = 完全不像我 &nbsp;&nbsp;&nbsp; <strong>5</strong> = 非常像我"
+    },
+    "welcome": {
+      "title": "发现你的元技能档案",
+      "subtitle": "完成我们的综合评估，探索你独特的能力地图",
+      "features": {
+        "questions": {
+          "title": "24个精心设计的问题",
+          "description": "探索您的认知、人际和自我发展技能的周密设计问题"
+        },
+        "duration": {
+          "title": "需要10-15分钟",
+          "description": "按照自己的节奏完成，使用直观的单问题流程"
+        },
+        "results": {
+          "title": "个性化结果地图",
+          "description": "在8个元技能领域获得您的能力的详细可视化"
+        },
+        "recommendations": {
+          "title": "量身定制的实践建议",
+          "description": "根据您的独特档案接收个性化实践建议"
+        }
+      },
+      "discover": {
+        "title": "您将发现：",
+        "cognitive": "您的认知能力水平（学习、批判性思维）",
+        "interpersonal": "人际交往技能优势（沟通、共情）",
+        "self": "自我发展领域（自我意识、正念、韧性）",
+        "stage": "您当前的发展阶段（初学者→精通者）",
+        "growth": "显示您关注领域的成长向量"
+      },
+      "start": "开始评估",
+      "backToDashboard": "返回仪表板"
+    }
+  },
+  "skills": {
+    "title": "元技能框架",
+    "subtitle": "掌握驱动所有其他学习的能力",
+    "domains": {
+      "cognitive": {
+        "title": "认知技能",
+        "description": "批判性思考、解决问题并做出更好的决策"
+      },
+      "interpersonal": {
+        "title": "人际技能",
+        "description": "建立牢固的关系并有效沟通"
+      },
+      "self": {
+        "title": "自我管理",
+        "description": "了解自己并有目的地导航生活"
+      }
+    }
+  },
+  "language": {
+    "switch": "切换语言",
+    "current": "当前语言",
+    "select": "选择你的首选语言"
+  },
+  "about": {
+    "hero": {
+      "title": "关于 MetaSkills",
+      "subtitle": "赋能个人掌握基础技能,解锁所有其他能力"
+    },
+    "mission": {
+      "title": "我们的使命",
+      "paragraph1": "在 MetaSkills,我们相信你能培养的最有价值的技能,是帮助你学习其他一切事物的技能。这些元技能——学会学习、批判性思维、情商等——是个人和职业成长的基础。",
+      "paragraph2": "我们的平台提供个性化评估、引导练习和进度跟踪,帮助你掌握这些基本能力,并将其应用到生活的各个方面。"
+    },
+    "whatWeOffer": {
+      "title": "我们提供什么",
+      "assessment": {
+        "emoji": "📊",
+        "title": "个性化评估",
+        "description": "通过我们的综合评估发现你当前的元技能档案"
+      },
+      "practices": {
+        "emoji": "🎯",
+        "title": "引导练习",
+        "description": "获得经过验证的练习和技巧来培养每一项元技能"
+      },
+      "tracking": {
+        "emoji": "📈",
+        "title": "进度跟踪",
+        "description": "通过详细的洞察和分析来监控你的长期成长"
+      }
+    },
+    "metaSkills": {
+      "title": "八大元技能",
+      "intro": "我们的平台专注于八项基本元技能,这些技能构成了个人效能的基础:",
+      "learning": {
+        "title": "学会学习",
+        "description": "高效获取新知识和技能"
+      },
+      "thinking": {
+        "title": "批判性思维",
+        "description": "分析信息并做出合理判断"
+      },
+      "communication": {
+        "title": "沟通",
+        "description": "有效交流想法并建立理解"
+      },
+      "empathy": {
+        "title": "共情",
+        "description": "理解并分享他人的感受"
+      },
+      "awareness": {
+        "title": "自我意识",
+        "description": "理解自己的思想和行为"
+      },
+      "mindfulness": {
+        "title": "正念",
+        "description": "保持当下专注和专注"
+      },
+      "resilience": {
+        "title": "韧性",
+        "description": "从挫折和挑战中恢复过来"
+      },
+      "emotional": {
+        "title": "情商",
+        "description": "有效识别和管理情绪"
+      }
+    },
+    "approach": {
+      "title": "我们的方法",
+      "science": {
+        "emoji": "🔬",
+        "title": "科学基础",
+        "description": "我们的框架基于心理学研究和学习科学,确保技术确实有效。"
+      },
+      "action": {
+        "emoji": "🎯",
+        "title": "行动导向",
+        "description": "我们专注于实际练习和现实应用,而不仅仅是理论。每项技能都配有可操作的练习。"
+      },
+      "progress": {
+        "emoji": "📊",
+        "title": "关注进步",
+        "description": "发展是一段旅程,而不是终点。我们帮助你跟踪进度并庆祝成长。"
+      }
+    },
+    "cta": {
+      "title": "今天就开始你的旅程",
+      "description": "发现你的元技能档案并开始你的个性化发展之旅",
+      "assessment": "参加评估",
+      "skills": "探索技能"
+    }
+  },
+  "questions": {
+    "q1": {
+      "text": "当你需要学习新东西时，你通常如何开始？",
+      "options": [
+        "我会立即投入，通过实践学习",
+        "我先彻底研究，然后练习",
+        "我会寻找结构化的课程或指导",
+        "我会把它分解成小而易于管理的步骤"
+      ]
+    },
+    "q2": {
+      "text": "你适应新信息或变化环境的速度有多快？"
+    },
+    "q3": {
+      "text": "当你遇到不理解的概念时，你会怎么做？",
+      "options": [
+        "我会一直尝试，直到弄明白",
+        "我会寻找不同的解释或资源",
+        "我会将其与我已经知道的事物联系起来",
+        "我会请人向我解释"
+      ]
+    },
+    "q4": {
+      "text": "面对复杂问题时，你如何处理？",
+      "options": [
+        "我凭借我的直觉",
+        "我会将其分解成更小的部分",
+        "我会收集数据并系统分析",
+        "我会首先考虑多个视角"
+      ]
+    },
+    "q5": {
+      "text": "你多久会质疑自己的假设和信念？"
+    },
+    "q6": {
+      "text": "当面对相互矛盾的信息时，你如何决定相信什么？",
+      "options": [
+        "我会选择感觉最准确的信息",
+        "我会评估来源的可信度",
+        "我会寻找支持性证据",
+        "我会寻求专家意见"
+      ]
+    },
+    "q7": {
+      "text": "你在向他人表达自己的想法时感到多自在？"
+    },
+    "q8": {
+      "text": "在传达重要信息时，你如何确保对方理解？",
+      "options": [
+        "我会详细解释",
+        "我会使用例子和类比",
+        "我会定期检查对方是否理解",
+        "我会根据听众调整我的方式"
+      ]
+    },
+    "q9": {
+      "text": "你在对话中倾听他人的程度如何？"
+    },
+    "q10": {
+      "text": "当有人与你分享问题时，你的第一反应是什么？",
+      "options": [
+        "我会立即提供解决方案",
+        "我会首先确认他们的感受",
+        "我会问如何能提供帮助",
+        "我会分享我经历的类似经历"
+      ]
+    },
+    "q11": {
+      "text": "你能准确感知他人感受的程度如何？"
+    },
+    "q12": {
+      "text": "当你与某人意见不一致时，你通常如何回应？",
+      "options": [
+        "我会清楚地表明我的立场",
+        "我会先尝试理解他们的观点",
+        "我会寻找共同点",
+        "如果情绪激动，我会推迟讨论"
+      ]
+    },
+    "q13": {
+      "text": "你对自己的情绪触发因素有多了解？"
+    },
+    "q14": {
+      "text": "当你犯错时，你通常如何反应？",
+      "options": [
+        "我会感到防御或尴尬",
+        "我会承认并继续前进",
+        "我会反思可以学到什么",
+        "我会寻求反馈以改进"
+      ]
+    },
+    "q15": {
+      "text": "你多久会反思自己的个人成长和发展？"
+    },
+    "q16": {
+      "text": "你多久能完全活在当下，而不是思考过去或未来？"
+    },
+    "q17": {
+      "text": "当你感到压力或不知所措时，什么最能帮助你？",
+      "options": [
+        "采取行动应对压力源",
+        "与人交谈",
+        "体育活动或锻炼",
+        "安静反思或冥想"
+      ]
+    },
+    "q18": {
+      "text": "你在保持专注于一单一任务而不分心方面表现如何？"
+    },
+    "q19": {
+      "text": "当你遇到挫折时，你恢复得有多快？"
+    },
+    "q20": {
+      "text": "失败后，你的典型心态是什么？",
+      "options": [
+        "我会纠结于出了什么问题",
+        "我需要时间才能再次尝试",
+        "我将其视为学习机会",
+        "我有动力证明我能做到"
+      ]
+    },
+    "q21": {
+      "text": "你如何处理超出舒适区的情况？"
+    },
+    "q22": {
+      "text": "你在练习想要提高的技能方面有多一致？"
+    },
+    "q23": {
+      "text": "你如何设定和实现个人发展目标？",
+      "options": [
+        "我会设定目标，但很难坚持",
+        "我会顺其自然，没有正式目标",
+        "我会设定具体目标并跟踪进度",
+        "我会根据情况调整目标"
+      ]
+    },
+    "q24": {
+      "text": "你对自己随时间发展新技能的能力有多大信心？"
+    }
+  }
+}

@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "title": "MetaSkills - Lernen Sie Fähigkeiten, die niemals veralten",
+    "description": "Meistern Sie Meta-Fähigkeiten wie kritisches Denken, emotionale Intelligenz und Anpassungsfähigkeit. Ihr lebenslanger Wettbewerbsvorteil in einer sich schnell verändernden Welt."
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "skills": "Fähigkeiten",
+    "assessment": "Bewertung",
+    "practices": "Übungen",
+    "journal": "Tagebuch",
+    "pricing": "Preise",
+    "contact": "Kontakt",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "dashboard": "Dashboard",
+    "profile": "Profil",
+    "logout": "Abmelden"
+  },
+  "hero": {
+    "badge": "Das Betriebssystem für menschliche Fähigkeiten",
+    "title": "Lernen Sie Fähigkeiten, die",
+    "titleHighlight": "niemals veralten",
+    "subtitle": "In einer Welt, in der technische Fähigkeiten alle 5 Jahre veralten, sind Meta-Fähigkeiten – die Fähigkeit zu lernen, zu denken, sich anzupassen und sich selbst und andere zu verstehen – Ihr lebenslanger Wettbewerbsvorteil.",
+    "cta": {
+      "primary": "Bewertung starten",
+      "secondary": "Framework erkunden"
+    },
+    "trust": {
+      "evidence": "Wissenschaftlich fundiert",
+      "privacy": "Datenschutz zuerst",
+      "human": "Menschenzentriert"
+    }
+  },
+  "footer": {
+    "tagline": "Lernen Sie Fähigkeiten, die niemals veralten. Bauen Sie ein Fundament für lebenslanges Wachstum.",
+    "links": {
+      "product": "Produkt",
+      "company": "Unternehmen",
+      "resources": "Ressourcen",
+      "legal": "Rechtliches"
+    },
+    "items": {
+      "assessment": "Bewertung",
+      "skills": "Meta-Skills",
+      "practices": "Praktiken",
+      "pricing": "Preise",
+      "about": "Über",
+      "blog": "Blog",
+      "contact": "Kontakt",
+      "privacy": "Datenschutz",
+      "terms": "AGB"
+    },
+    "copyright": "© 2025 MetaSkills.ai. Alle Rechte vorbehalten.",
+    "madeWith": "Mit ❤️ für lebenslange Lerner erstellt"
+  },
+  "auth": {
+    "login": {
+      "title": "Willkommen zurück",
+      "subtitle": "Melden Sie sich an, um Ihre Lernreise fortzusetzen",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "button": "Anmelden",
+      "noAccount": "Haben Sie kein Konto?",
+      "signUp": "Registrieren",
+      "forgotPassword": "Passwort vergessen?"
+    },
+    "signup": {
+      "title": "Konto erstellen",
+      "subtitle": "Beginnen Sie Ihre Reise zur Beherrschung von Meta-Fähigkeiten",
+      "name": "Vollständiger Name",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "agree": "Ich stimme zu",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzrichtlinie",
+      "button": "Konto erstellen",
+      "hasAccount": "Haben Sie bereits ein Konto?",
+      "login": "Anmelden"
+    }
+  },
+  "assessment": {
+    "title": "Entdecken Sie Ihr Meta-Fähigkeiten-Profil",
+    "subtitle": "Nehmen Sie unsere umfassende Bewertung, um Ihre aktuellen Fähigkeiten in den Bereichen kognitiv, zwischenmenschlich und Selbstmanagement zu verstehen",
+    "start": "Bewertung starten",
+    "duration": "Dauer etwa 15 Minuten",
+    "questions": "48 Fragen",
+    "flow": {
+      "questionOf": "Frage {current} von {total}",
+      "complete": "{percent}% abgeschlossen",
+      "back": "← Zurück",
+      "skip": "Überspringen →",
+      "ratingHint": "<strong>1</strong> = Überhaupt nicht wie ich &nbsp;&nbsp;&nbsp; <strong>5</strong> = Sehr wie ich"
+    },
+    "welcome": {
+      "title": "Entdecken Sie Ihr Meta-Fähigkeiten-Profil",
+      "subtitle": "Nehmen Sie unsere umfassende Bewertung, um Ihre einzigartige Fähigkeitenlandschaft zu erkunden",
+      "features": {
+        "questions": {
+          "title": "24 durchdachte Fragen",
+          "description": "Sorgfältig gestaltete Fragen zur Erkundung Ihrer kognitiven, zwischenmenschlichen und Selbstentwicklungsfähigkeiten"
+        },
+        "duration": {
+          "title": "Dauer 10-15 Minuten",
+          "description": "Absolvieren Sie in Ihrem eigenen Tempo mit unserem intuitiven Einzelfragen-Ablauf"
+        },
+        "results": {
+          "title": "Personalisierte Ergebniskarte",
+          "description": "Erhalten Sie eine detaillierte Visualisierung Ihrer Fähigkeiten über 8 Meta-Fähigkeiten-Bereiche"
+        },
+        "recommendations": {
+          "title": "Maßgeschneiderte Practice-Empfehlungen",
+          "description": "Erhalten Sie personalisierte Übungsvorschläge basierend auf Ihrem einzigartigen Profil"
+        }
+      },
+      "discover": {
+        "title": "Was Sie entdecken werden:",
+        "cognitive": "Ihre kognitiven Fähigkeitsniveaus (Lernen, Kritisches Denken)",
+        "interpersonal": "Zwischenmenschliche Fähigkeiten und Stärken (Kommunikation, Empathie)",
+        "self": "Bereiche der Selbstentwicklung (Selbstbewusstsein, Achtsamkeit, Resilienz)",
+        "stage": "Ihr aktuelles Entwicklungsstadium (Anfänger → Meister)",
+        "growth": "Wachstumsvektoren zeigen Ihre Schwerpunktbereiche"
+      },
+      "start": "Bewertung starten",
+      "backToDashboard": "Zurück zum Dashboard"
+    }
+  },
+  "skills": {
+    "title": "Meta-Fähigkeiten-Framework",
+    "subtitle": "Meistern Sie die Fähigkeiten, die alles andere Lernen antreiben",
+    "domains": {
+      "cognitive": {
+        "title": "Kognitive Fähigkeiten",
+        "description": "Denken Sie kritisch, lösen Sie Probleme und treffen Sie bessere Entscheidungen"
+      },
+      "interpersonal": {
+        "title": "Zwischenmenschliche Fähigkeiten",
+        "description": "Aufbau starker Beziehungen und effektive Kommunikation"
+      },
+      "self": {
+        "title": "Selbstmanagement",
+        "description": "Verstehen Sie sich selbst und navigieren Sie mit Zielstrebigkeit durchs Leben"
+      }
+    }
+  },
+  "language": {
+    "switch": "Sprache wechseln",
+    "current": "Aktuelle Sprache",
+    "select": "Wählen Sie Ihre bevorzugte Sprache"
+  },
+  "framework": {
+    "label": "Das Framework",
+    "title": "Drei Systeme, ein Betriebssystem",
+    "subtitle": "Alle menschlichen Fähigkeiten können in drei miteinander verbundene Systeme organisiert werden. Dies ist keine Kursliste – es ist eine Landkarte des menschlichen Potenzials.",
+    "cognitive": {
+      "title": "Kognitives System",
+      "description": "Wie Sie die Welt verstehen, lernen, denken und Entscheidungen treffen. Die Grundlage aller geistigen Arbeit.",
+      "skills": {
+        "learning": "Lernen zu lernen",
+        "thinking": "Kritisches Denken",
+        "systems": "Systemdenken",
+        "decision": "Entscheidungsfindung"
+      }
+    },
+    "interpersonal": {
+      "title": "Zwischenmenschliches System",
+      "description": "Wie Sie andere verstehen, Beziehungen aufbauen, kommunizieren, zusammenarbeiten und soziale Komplexität navigieren.",
+      "skills": {
+        "emotional": "Emotionale Intelligenz",
+        "communication": "Kommunikation",
+        "empathy": "Empathie und Perspektivwechsel",
+        "collaboration": "Zusammenarbeit"
+      }
+    },
+    "self": {
+      "title": "Selbstsystem",
+      "description": "Wie Sie Ihre innere Welt verwalten – Emotionen, Aufmerksamkeit, Energie, Motivation und persönliches Wachstum.",
+      "skills": {
+        "awareness": "Selbstbewusstsein",
+        "regulation": "Emotionsregulation",
+        "resilience": "Resilienz und Anpassungsfähigkeit",
+        "mindfulness": "Achtsamkeit und Fokus"
+      }
+    },
+    "viewComplete": "Vollständige Fähigkeitenlandkarte anzeigen"
+  },
+  "why": {
+    "label": "Das Warum",
+    "title": "Warum Meta-Fähigkeiten",
+    "titleHighlight": "wichtiger denn je",
+    "subtitle": "Wir erleben eine beispiellose Beschleunigung des Wandels. Die Halbwertszeit einer erlernten professionellen Fähigkeit wird jetzt auf nur 5 Jahre geschätzt.",
+    "description": "Während sich spezifische Tools und Frameworks weiterentwickeln werden, werden sich die grundlegenden menschlichen Fähigkeiten zu lernen, kritisch zu denken, Verbindungen zu anderen herzustellen und sich anzupassen, nur im Wert steigern.",
+    "benefits": {
+      "automation": {
+        "title": "Automatisierungssicher für Ihre Karriere",
+        "description": "AI ist gut bei repetitiven Aufgaben. Menschen excelieren bei Nuancen, Kreativität und komplexen Urteilen."
+      },
+      "wellbeing": {
+        "title": "Grundlage für Wohlbefinden schaffen",
+        "description": "Forschung zeigt, dass Meta-Fähigkeiten wie Resilienz und Selbstbewusstsein stark mit Lebenszufriedenheit korrelieren."
+      },
+      "universal": {
+        "title": "Universell relevant bleiben",
+        "description": "Diese Fähigkeiten werden in jeder Kultur, Branche und Rolle geschätzt – jetzt und Jahrzehnte später."
+      }
+    },
+    "chart": {
+      "title": "Fähigkeitenwert über Zeit",
+      "technical": {
+        "label": "Technische Fähigkeiten",
+        "trend": "↓ Abnehmend",
+        "description": "Verlieren an Relevanz mit technologischem Fortschritt"
+      },
+      "meta": {
+        "label": "Meta-Fähigkeiten",
+        "trend": "↑ Wachsend",
+        "description": "Wachsen im Wert im Laufe Ihrer Karriere"
+      },
+      "quote": "Die Fähigkeit, schneller zu lernen als Ihre Konkurrenten, ist Ihr einziger nachhaltiger Wettbewerbsvorteil.",
+      "attribution": "— Arie de Geus, ehemaliger Leiter der Strategie, Royal Dutch Shell"
+    }
+  },
+  "approach": {
+    "label": "Der Ansatz",
+    "title": "Eine andere Art zu lernen",
+    "subtitle": "Dies ist keine Kursplattform. Es ist ein ruhiger Raum für Reflexion, Praxis und schrittweise Entwicklung – kein Druck, keine Gamification, kein Vergleich.",
+    "microlearning": {
+      "emoji": "🌿",
+      "title": "Mikrolernen",
+      "description": "5–10 Minuten Übungen. Keine überwältigenden Kurse. Lernen Sie in kleinen Momenten während Ihres Tages."
+    },
+    "nonLinear": {
+      "emoji": "🧭",
+      "title": "Nicht-lineare Pfade",
+      "description": "Folgen Sie, was resoniert. Keine vorgeschriebene Reihenfolge. Ihre Reise ist einzigartig für Sie."
+    },
+    "practice": {
+      "emoji": "📓",
+      "title": "Praxis und Reflexion",
+      "description": "Wissen allein ist keine Transformation. Wir betonen reale Anwendungen über Theorie."
+    },
+    "ai": {
+      "emoji": "🤖",
+      "title": "AI-geführte Reflexion",
+      "description": "Ein thoughtful AI-Begleiter hilft Ihnen, Muster zu sehen, nicht Lösungen vorzuschreiben. Immer Ihre Wahl."
+    },
+    "calm": {
+      "emoji": "🌙",
+      "title": "Ruhiges Erlebnis",
+      "description": "Ablenkungsfreie Schnittstellen. Dunkelmodus verfügbar. Für Fokus entworfen, nicht für Engagementsmetriken."
+    },
+    "longterm": {
+      "emoji": "🪴",
+      "title": "Langfristiges Wachstum",
+      "description": "Wir messen Fortschritt in Jahren, nicht Tagen. Keine Streaks, kein FOMO. Nachhaltige Entwicklung."
+    }
+  },
+  "start": {
+    "label": "Einstiegspunkte",
+    "title": "Beginnen Sie, wo Sie sind",
+    "subtitle": "Keine Vorbereitung nötig. Keine Voraussetzungen. Erscheinen Sie einfach, wie Sie sind, und machen Sie einen kleinen Schritt.",
+    "assessment": {
+      "title": "Meta-Fähigkeiten-Bewertung",
+      "description": "Nehmen Sie 10 Minuten, um über Ihre aktuellen Fähigkeiten zu reflektieren. Erhalten Sie eine personalisierte Landkarte – keine Punktzahl.",
+      "cta": "Bewertung starten"
+    },
+    "practice": {
+      "title": "5-Minuten-Übung",
+      "description": "Eine einfache, bodenständige Übung, die Sie jetzt tun können. Keine Anmeldung erforderlich.",
+      "cta": "Übung versuchen"
+    },
+    "calm": {
+      "title": "Ruhiger Lernmodus",
+      "description": "Betreten Sie unseren ablenkungsfreien Lese- und Reflexionsraum. Kein Tracking, keine Benachrichtigungen.",
+      "cta": "Ruhigen Raum betreten"
+    }
+  },
+  "philosophy": {
+    "label": "Unsere Philosophie",
+    "title": "Dies ist keine weitere Plattform, um Sie produktiver zu machen",
+    "subtitle": "Wir existieren, um Ihnen zu helfen, ein bodenständiges, anpassungsfähiges inneres System aufzubauen – nicht um Sie wie eine Maschine zu optimieren. Wachstum braucht Zeit. Reflexion ist chaotisch. Und das ist okay.",
+    "believe": {
+      "title": "Was wir glauben",
+      "awareness": "Bewusstsein ist wichtiger als Leistung",
+      "development": "Entwicklung ist wichtiger als Vergleich",
+      "structure": "Struktur bietet mehr Wert als Punktzahlen",
+      "longterm": "Langfristiges Wachstum schlägt kurzfristige Effizienz"
+    },
+    "reject": {
+      "title": "Was wir ablehnen",
+      "hustle": "Hustle-Kultur und Burnout",
+      "gamification": "Aggressive Gamification und Sucht",
+      "ranking": "Ranking, Wettbewerb und Vergleich",
+      "optimization": "Menschen wie Optimierungsprobleme behandeln"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Über MetaSkills",
+      "subtitle": "Einzelpersonen befähigen, die grundlegenden Fähigkeiten zu meistern, die alle anderen Fähigkeiten freischalten"
+    },
+    "mission": {
+      "title": "Unsere Mission",
+      "paragraph1": "Bei MetaSkills glauben wir, dass die wertvollsten Fähigkeiten, die Sie entwickeln können, diejenigen sind, die Ihnen helfen, alles andere zu lernen. Diese Meta-Fähigkeiten – Lernen zu lernen, kritisches Denken, emotionale Intelligenz und mehr – sind die Grundlage für persönliches und professionelles Wachstum.",
+      "paragraph2": "Unsere Plattform bietet personalisierte Bewertungen, geführte Übungen und Fortschritts-Tracking, um Ihnen zu helfen, diese grundlegenden Fähigkeiten zu meistern und in jedem Bereich Ihres Lebens anzuwenden."
+    },
+    "whatWeOffer": {
+      "title": "Was wir bieten",
+      "assessment": {
+        "emoji": "📊",
+        "title": "Personalisierte Bewertung",
+        "description": "Entdecken Sie Ihr aktuelles Meta-Fähigkeiten-Profil mit unserer umfassenden Bewertung"
+      },
+      "practices": {
+        "emoji": "🎯",
+        "title": "Geführte Übungen",
+        "description": "Zugang zu bewährten Übungen und Techniken zur Entwicklung jeder Meta-Fähigkeit"
+      },
+      "tracking": {
+        "emoji": "📈",
+        "title": "Fortschritts-Tracking",
+        "description": "Überwachen Sie Ihr Wachstum über Zeit mit detaillierten Einblicken und Analysen"
+      }
+    },
+    "metaSkills": {
+      "title": "Die 8 Meta-Fähigkeiten",
+      "intro": "Unsere Plattform konzentriert sich auf acht grundlegende Meta-Fähigkeiten, die die Grundlage für persönliche Effektivität bilden:",
+      "learning": {
+        "title": "Lernen zu lernen",
+        "description": "Effizient neues Wissen und Fähigkeiten erwerben"
+      },
+      "thinking": {
+        "title": "Kritisches Denken",
+        "description": "Informationen analysieren und fundierte Urteile fällen"
+      },
+      "communication": {
+        "title": "Kommunikation",
+        "description": "Ideen effektiv austauschen und Verständnis aufbauen"
+      },
+      "empathy": {
+        "title": "Empathie",
+        "description": "Gefühle anderer verstehen und teilen"
+      },
+      "awareness": {
+        "title": "Selbstbewusstsein",
+        "description": "Eigene Gedanken und Verhalten verstehen"
+      },
+      "mindfulness": {
+        "title": "Achtsamkeit",
+        "description": "Im Moment präsent und fokussiert bleiben"
+      },
+      "resilience": {
+        "title": "Resilienz",
+        "description": "Von Rückschlägen und Herausforderungen erholen"
+      },
+      "emotional": {
+        "title": "Emotionale Intelligenz",
+        "description": "Emotionen effektiv erkennen und verwalten"
+      }
+    },
+    "approach": {
+      "title": "Unser Ansatz",
+      "science": {
+        "emoji": "🔬",
+        "title": "Wissenschaftsbasiert",
+        "description": "Unser Framework basiert auf psychologischer Forschung und Lernwissenschaft und stellt Techniken sicher, die sich als wirksam erwiesen haben."
+      },
+      "action": {
+        "emoji": "🎯",
+        "title": "Handlungsorientiert",
+        "description": "Wir konzentrieren uns auf praktische Übungen und reale Anwendungen, nicht nur auf Theorie. Jede Fähigkeit kommt mit handlungsorientierten Übungen."
+      },
+      "progress": {
+        "emoji": "📊",
+        "title": "Fortschrittsorientiert",
+        "description": "Entwicklung ist eine Reise, kein Ziel. Wir helfen Ihnen, Fortschritte zu verfolgen und Wachstum über Zeit zu feiern."
+      }
+    },
+    "cta": {
+      "title": "Starten Sie heute Ihre Reise",
+      "description": "Entdecken Sie Ihr Meta-Fähigkeiten-Profil und beginnen Sie Ihre personalisierte Entwicklungsjourney",
+      "assessment": "Bewertung durchführen",
+      "skills": "Fähigkeiten erkunden"
+    }
+  },
+  "questions": {
+    "q1": {
+      "text": "Wenn Sie etwas Neues lernen müssen, wie gehen Sie normalerweise vor?",
+      "options": [
+        "Ich stürze mich sofort hinein und lerne durch Tun",
+        "Ich recherchiere zuerst gründlich, dann übe ich",
+        "Ich suche strukturierte Kurse oder Anleitung",
+        "Ich zerlege es in kleine, machbare Schritte"
+      ]
+    },
+    "q2": {
+      "text": "Wie schnell passen Sie sich neuen Informationen oder sich ändernden Umständen an?"
+    },
+    "q3": {
+      "text": "Wenn Sie auf ein Konzept stoßen, das Sie nicht verstehen, was tun Sie?",
+      "options": [
+        "Ich versuche weiter, bis es Sinn ergibt",
+        "Ich suche nach verschiedenen Erklärungen oder Ressourcen",
+        "Ich verbinde es mit Dingen, die ich bereits kenne",
+        "Ich bitte jemanden, es mir zu erklären"
+      ]
+    },
+    "q4": {
+      "text": "Wie gehen Sie mit komplexen Problemen um?",
+      "options": [
+        "Ich vertraue meinem Bauchgefühl",
+        "Ich zerlege es in kleinere Teile",
+        "Ich sammle Daten und analysiere systematisch",
+        "Ich betrachte zunächst mehrere Perspektiven"
+      ]
+    },
+    "q5": {
+      "text": "Wie oft hinterfragen Sie Ihre eigenen Annahmen und Überzeugungen?"
+    },
+    "q6": {
+      "text": "Wie entscheiden Sie, was Sie glauben sollen, wenn Sie mit widersprüchlichen Informationen konfrontiert werden?",
+      "options": [
+        "Ich entscheide mich für das, was am genauesten wirkt",
+        "Ich bewerte die Glaubwürdigkeit der Quellen",
+        "Ich suche nach unterstützenden Beweisen",
+        "Ich suche Expertenmeinungen"
+      ]
+    },
+    "q7": {
+      "text": "Wie wohlfühlen Sie sich dabei, Ihre Ideen anderen auszudrücken?"
+    },
+    "q8": {
+      "text": "Wie stellen Sie sicher, dass wichtige Informationen verstanden werden?",
+      "options": [
+        "Ich erkläre es im Detail",
+        "Ich verwende Beispiele und Analogien",
+        "Ich überprüfe regelmäßig das Verständnis",
+        "Ich passe meinen Stil dem Zuhörer an"
+      ]
+    },
+    "q9": {
+      "text": "Wie gut hören Sie anderen in Gesprächen zu?"
+    },
+    "q10": {
+      "text": "Was ist Ihre erste Reaktion, wenn jemand ein Problem mit Ihnen teilt?",
+      "options": [
+        "Ich biete sofort Lösungen an",
+        "Ich bestätige zuerst ihre Gefühle",
+        "Ich frage, wie ich helfen kann",
+        "Ich teile eine ähnliche Erfahrung, die ich hatte"
+      ]
+    },
+    "q11": {
+      "text": "Wie genau können Sie wahrnehmen, wie andere sich fühlen?"
+    },
+    "q12": {
+      "text": "Wie reagieren Sie normalerweise, wenn Sie mit jemandem nicht einverstanden sind?",
+      "options": [
+        "Ich mache meine Position deutlich",
+        "Ich versuche zuerst, ihre Perspektive zu verstehen",
+        "Ich suche nach gemeinsamen Nenner",
+        "Ich verschiebe die Diskussion, wenn die Emotionen hochkochen"
+      ]
+    },
+    "q13": {
+      "text": "Wie gut verstehen Sie Ihre eigenen emotionalen Auslöser?"
+    },
+    "q14": {
+      "text": "Wie reagieren Sie normalerweise, wenn Sie einen Fehler machen?",
+      "options": [
+        "Ich fühle mich defensiv oder geniert",
+        "Ich gebe es zu und mache weiter",
+        "Ich reflektiere darüber, was ich lernen kann",
+        "Ich suche Feedback, um mich zu verbessern"
+      ]
+    },
+    "q15": {
+      "text": "Wie oft reflektieren Sie Ihr persönliches Wachstum und Ihre Entwicklung?"
+    },
+    "q16": {
+      "text": "Wie oft sind Sie voll im Moment präsent, statt an Vergangenheit oder Zukunft zu denken?"
+    },
+    "q17": {
+      "text": "Was hilft Ihnen am meisten, wenn Sie sich gestresst oder überwältigt fühlen?",
+      "options": [
+        "Handeln, um Stressfaktor anzugehen",
+        "Mit jemandem darüber sprechen",
+        "Körperliche Aktivität oder Bewegung",
+        "Stille Reflexion oder Meditation"
+      ]
+    },
+    "q18": {
+      "text": "Wie gut können Sie sich auf eine einzelne Aufgabe konzentrieren, ohne abgelenkt zu werden?"
+    },
+    "q19": {
+      "text": "Wie schnell erholen Sie sich, wenn Sie einen Rückschlag erleiden?"
+    },
+    "q20": {
+      "text": "Was ist Ihre typische Denkweise nach einem Versagen?",
+      "options": [
+        "Ich grüble darüber nach, was schiefgelaufen ist",
+        "Ich brauche Zeit, bevor ich es erneut versuche",
+        "Ich sehe es als Lernmöglichkeit",
+        "Ich bin motiviert, zu beweisen, dass ich es kann"
+      ]
+    },
+    "q21": {
+      "text": "Wie gehen Sie mit Situationen um, die außerhalb Ihrer Komfortzone liegen?"
+    },
+    "q22": {
+      "text": "Wie konsequent sind Sie beim Üben von Fähigkeiten, die Sie verbessern möchten?"
+    },
+    "q23": {
+      "text": "Wie gehen Sie beim Setzen und Erreichen persönlicher Entwicklungsziele vor?",
+      "options": [
+        "Ich setze mir Ziele, habe aber Schwierigkeiten, sie umzusetzen",
+        "Ich nehme es tageweise, ohne formale Ziele",
+        "Ich setze mir spezifische Ziele und verfolge den Fortschritt",
+        "Ich passe meine Ziele den Umständen an"
+      ]
+    },
+    "q24": {
+      "text": "Wie zuversichtlich fühlen Sie sich in Ihrer Fähigkeit, im Laufe der Zeit neue Fähigkeiten zu entwickeln?"
+    }
+  }
+}

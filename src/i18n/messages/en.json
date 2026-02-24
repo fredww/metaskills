@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "title": "MetaSkills - Learn Abilities That Never Expire",
+    "description": "Master meta-skills like critical thinking, emotional intelligence, and adaptability. Your lifelong competitive advantage in a rapidly changing world."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "assessment": "Assessment",
+    "practices": "Practices",
+    "journal": "Journal",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "login": "Login",
+    "signup": "Sign Up",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "hero": {
+    "badge": "The Human Capability Operating System",
+    "title": "Learn Abilities That",
+    "titleHighlight": "Never Expire",
+    "subtitle": "In a world where technical skills become obsolete every 5 years, meta-skills—the ability to learn, think, adapt, and understand yourself and others—are your lifelong competitive advantage.",
+    "cta": {
+      "primary": "Start Your Assessment",
+      "secondary": "Explore the Framework"
+    },
+    "trust": {
+      "evidence": "Evidence-based",
+      "privacy": "Privacy-first",
+      "human": "Human-centered"
+    }
+  },
+  "framework": {
+    "label": "The Framework",
+    "title": "Three Systems, One Operating System",
+    "subtitle": "All human capabilities can be organized into three interconnected systems. This isn't a course list—it's a map of human potential.",
+    "cognitive": {
+      "title": "Cognitive System",
+      "description": "How you understand the world, learn, think, and make decisions. The foundation of all intellectual work.",
+      "skills": {
+        "learning": "Learning to Learn",
+        "thinking": "Critical Thinking",
+        "systems": "Systems Thinking",
+        "decision": "Decision Making"
+      }
+    },
+    "interpersonal": {
+      "title": "Interpersonal System",
+      "description": "How you understand others, build relationships, communicate, collaborate, and navigate social complexity.",
+      "skills": {
+        "emotional": "Emotional Intelligence",
+        "communication": "Communication",
+        "empathy": "Empathy & Perspective-Taking",
+        "collaboration": "Collaboration"
+      }
+    },
+    "self": {
+      "title": "Self System",
+      "description": "How you manage your inner world—emotions, attention, energy, motivation, and personal growth.",
+      "skills": {
+        "awareness": "Self-Awareness",
+        "regulation": "Emotional Regulation",
+        "resilience": "Resilience & Adaptability",
+        "mindfulness": "Mindfulness & Focus"
+      }
+    },
+    "viewComplete": "View Complete Skill Map"
+  },
+  "why": {
+    "label": "The Why",
+    "title": "Why Meta-Skills",
+    "titleHighlight": "Matter Now More Than Ever",
+    "subtitle": "We're living through an unprecedented acceleration of change. The half-life of a learned professional skill is now estimated at only 5 years.",
+    "description": "While specific tools and frameworks will continue to evolve, the fundamental human capabilities to learn, think critically, connect with others, and adapt will only increase in value.",
+    "benefits": {
+      "automation": {
+        "title": "Automation-Proof Your Career",
+        "description": "AI excels at repetitive tasks. Humans excel at nuance, creativity, and complex judgment."
+      },
+      "wellbeing": {
+        "title": "Build a Foundation for Wellbeing",
+        "description": "Research shows that meta-skills like resilience and self-awareness correlate strongly with life satisfaction."
+      },
+      "universal": {
+        "title": "Stay Universally Relevant",
+        "description": "These capabilities are valued across every culture, industry, and role—now and decades from now."
+      }
+    },
+    "chart": {
+      "title": "Skill Value Over Time",
+      "technical": {
+        "label": "Technical Skills",
+        "trend": "↓ Declining",
+        "description": "Lose relevance as technology advances"
+      },
+      "meta": {
+        "label": "Meta-Skills",
+        "trend": "↑ Growing",
+        "description": "Compound in value throughout your career"
+      },
+      "quote": "The ability to learn faster than your competitors is your only sustainable competitive advantage.",
+      "attribution": "— Arie de Geus, Former Head of Strategy, Royal Dutch Shell"
+    }
+  },
+  "approach": {
+    "label": "The Approach",
+    "title": "A Different Way to Learn",
+    "subtitle": "This isn't a course platform. It's a calm space for reflection, practice, and gradual growth—no pressure, no gamification, no comparison.",
+    "microlearning": {
+      "emoji": "🌿",
+      "title": "Microlearning",
+      "description": "5–10 minute practices. No overwhelming courses. Learn in small moments throughout your day."
+    },
+    "nonLinear": {
+      "emoji": "🧭",
+      "title": "Non-Linear Paths",
+      "description": "Follow what resonates. No prescribed order. Your journey is unique to you."
+    },
+    "practice": {
+      "emoji": "📓",
+      "title": "Practice & Reflection",
+      "description": "Knowledge alone isn't transformation. We emphasize real-world application over theory."
+    },
+    "ai": {
+      "emoji": "🤖",
+      "title": "AI-Guided Reflection",
+      "description": "A thoughtful AI companion helps you see patterns, not prescribe solutions. Always your choice."
+    },
+    "calm": {
+      "emoji": "🌙",
+      "title": "Calm Experience",
+      "description": "Distraction-free interfaces. Dark mode available. Designed for focus, not engagement metrics."
+    },
+    "longterm": {
+      "emoji": "🪴",
+      "title": "Long-Term Growth",
+      "description": "We measure progress in years, not days. No streaks, no FOMO. Sustainable development."
+    }
+  },
+  "start": {
+    "label": "Entry Points",
+    "title": "Begin Where You Are",
+    "subtitle": "No preparation needed. No prerequisites. Just show up as you are and take one small step.",
+    "assessment": {
+      "title": "Meta-Skills Assessment",
+      "description": "Take 10 minutes to reflect on your current capabilities. Receive a personalized map—not a score.",
+      "cta": "Start Assessment"
+    },
+    "practice": {
+      "title": "5-Minute Practice",
+      "description": "One simple, grounded exercise you can do right now. No signup required.",
+      "cta": "Try a Practice"
+    },
+    "calm": {
+      "title": "Calm Learning Mode",
+      "description": "Enter our distraction-free reading and reflection space. No tracking, no notifications.",
+      "cta": "Enter Calm Space"
+    }
+  },
+  "philosophy": {
+    "label": "Our Philosophy",
+    "title": "This Is Not Another Platform to Make You More Productive",
+    "subtitle": "We exist to help you build a grounded, adaptive inner system—not to optimize you like a machine. Growth takes time. Reflection is messy. And that's okay.",
+    "believe": {
+      "title": "What We Believe",
+      "awareness": "Awareness matters more than performance",
+      "development": "Development is more important than comparison",
+      "structure": "Structure provides more value than scores",
+      "longterm": "Long-term growth trumps short-term efficiency"
+    },
+    "reject": {
+      "title": "What We Reject",
+      "hustle": "Hustle culture and burnout",
+      "gamification": "Aggressive gamification and addiction",
+      "ranking": "Ranking, competition, and comparison",
+      "optimization": "Treating humans like optimization problems"
+    }
+  },
+  "footer": {
+    "tagline": "Learn abilities that never expire. Build a foundation for lifelong growth.",
+    "links": {
+      "product": "Product",
+      "company": "Company",
+      "resources": "Resources",
+      "legal": "Legal"
+    },
+    "items": {
+      "assessment": "Assessment",
+      "skills": "Meta-Skills",
+      "practices": "Practices",
+      "pricing": "Pricing",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "copyright": "© 2025 MetaSkills.ai. All rights reserved.",
+    "madeWith": "Made with ❤️ for lifelong learners"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to continue your learning journey",
+      "email": "Email address",
+      "password": "Password",
+      "button": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "forgotPassword": "Forgot password?"
+    },
+    "signup": {
+      "title": "Create Your Account",
+      "subtitle": "Start your journey to mastering meta-skills",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "agree": "I agree to the",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "button": "Create Account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    }
+  },
+  "assessment": {
+    "title": "Discover Your Meta-Skills Profile",
+    "subtitle": "Take our comprehensive assessment to understand your current capabilities across cognitive, interpersonal, and self-management domains",
+    "start": "Start Assessment",
+    "duration": "Takes about 15 minutes",
+    "questions": "48 questions",
+    "flow": {
+      "questionOf": "Question {current} of {total}",
+      "complete": "{percent}% Complete",
+      "back": "← Back",
+      "skip": "Skip →",
+      "ratingHint": "<strong>1</strong> = Not at all like me &nbsp;&nbsp;&nbsp; <strong>5</strong> = Very much like me"
+    },
+    "welcome": {
+      "title": "Discover Your Meta-Skills Profile",
+      "subtitle": "Take our comprehensive assessment to uncover your unique capability landscape",
+      "features": {
+        "questions": {
+          "title": "24 Thoughtful Questions",
+          "description": "Carefully designed questions exploring your cognitive, interpersonal, and self-development skills"
+        },
+        "duration": {
+          "title": "Takes 10-15 Minutes",
+          "description": "Complete at your own pace with our intuitive single-question flow"
+        },
+        "results": {
+          "title": "Personalized Results Map",
+          "description": "Get a detailed visualization of your capabilities across 8 meta-skills domains"
+        },
+        "recommendations": {
+          "title": "Tailored Practice Recommendations",
+          "description": "Receive personalized practice suggestions based on your unique profile"
+        }
+      },
+      "discover": {
+        "title": "What You'll Discover:",
+        "cognitive": "Your cognitive capability levels (Learning, Critical Thinking)",
+        "interpersonal": "Interpersonal skills strengths (Communication, Empathy)",
+        "self": "Self-development areas (Self-Awareness, Mindfulness, Resilience)",
+        "stage": "Your current development stage (Beginner → Master)",
+        "growth": "Growth vectors showing your focus areas"
+      },
+      "start": "Start Assessment",
+      "backToDashboard": "Back to Dashboard"
+    }
+  },
+  "skills": {
+    "title": "Meta-Skills Framework",
+    "subtitle": "Master the abilities that power all other learning",
+    "domains": {
+      "cognitive": {
+        "title": "Cognitive Skills",
+        "description": "Think critically, solve problems, and make better decisions"
+      },
+      "interpersonal": {
+        "title": "Interpersonal Skills",
+        "description": "Build strong relationships and communicate effectively"
+      },
+      "self": {
+        "title": "Self-Management",
+        "description": "Understand yourself and navigate life with purpose"
+      }
+    }
+  },
+  "language": {
+    "switch": "Switch Language",
+    "current": "Current Language",
+    "select": "Select your preferred language"
+  },
+  "about": {
+    "hero": {
+      "title": "About MetaSkills",
+      "subtitle": "Empowering individuals to master the fundamental skills that unlock all other capabilities"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "paragraph1": "At MetaSkills, we believe that the most valuable skills you can develop are the ones that help you learn everything else. These meta-skills—learning to learn, critical thinking, emotional intelligence, and more—are the foundation of personal and professional growth.",
+      "paragraph2": "Our platform provides personalized assessments, guided practices, and progress tracking to help you master these fundamental capabilities and apply them in every area of your life."
+    },
+    "whatWeOffer": {
+      "title": "What We Offer",
+      "assessment": {
+        "emoji": "📊",
+        "title": "Personalized Assessment",
+        "description": "Discover your current meta-skills profile with our comprehensive assessment"
+      },
+      "practices": {
+        "emoji": "🎯",
+        "title": "Guided Practices",
+        "description": "Access proven exercises and techniques to develop each meta-skill"
+      },
+      "tracking": {
+        "emoji": "📈",
+        "title": "Progress Tracking",
+        "description": "Monitor your growth over time with detailed insights and analytics"
+      }
+    },
+    "metaSkills": {
+      "title": "The 8 Meta-Skills",
+      "intro": "Our platform focuses on eight fundamental meta-skills that form the foundation of personal effectiveness:",
+      "learning": {
+        "title": "Learning to Learn",
+        "description": "Acquire new knowledge and skills efficiently"
+      },
+      "thinking": {
+        "title": "Critical Thinking",
+        "description": "Analyze information and make sound judgments"
+      },
+      "communication": {
+        "title": "Communication",
+        "description": "Exchange ideas effectively and build understanding"
+      },
+      "empathy": {
+        "title": "Empathy",
+        "description": "Understand and share the feelings of others"
+      },
+      "awareness": {
+        "title": "Self-Awareness",
+        "description": "Understand your own thoughts and behaviors"
+      },
+      "mindfulness": {
+        "title": "Mindfulness",
+        "description": "Stay present and focused in the moment"
+      },
+      "resilience": {
+        "title": "Resilience",
+        "description": "Bounce back from setbacks and challenges"
+      },
+      "emotional": {
+        "title": "Emotional Intelligence",
+        "description": "Recognize and manage emotions effectively"
+      }
+    },
+    "approach": {
+      "title": "Our Approach",
+      "science": {
+        "emoji": "🔬",
+        "title": "Science-Based",
+        "description": "Our framework is grounded in psychological research and learning science, ensuring techniques that are proven to work."
+      },
+      "action": {
+        "emoji": "🎯",
+        "title": "Action-Oriented",
+        "description": "We focus on practical exercises and real-world applications, not just theory. Every skill comes with actionable practices."
+      },
+      "progress": {
+        "emoji": "📊",
+        "title": "Progress-Focused",
+        "description": "Development is a journey, not a destination. We help you track progress and celebrate growth over time."
+      }
+    },
+    "cta": {
+      "title": "Start Your Journey Today",
+      "description": "Discover your meta-skills profile and begin your personalized development journey",
+      "assessment": "Take Assessment",
+      "skills": "Explore Skills"
+    }
+  },
+  "questions": {
+    "q1": {
+      "text": "When you need to learn something new, how do you typically approach it?",
+      "options": [
+        "I dive in immediately and learn by doing",
+        "I research thoroughly first, then practice",
+        "I seek structured courses or guidance",
+        "I break it down into small, manageable steps"
+      ]
+    },
+    "q2": {
+      "text": "How quickly do you adapt to new information or changing circumstances?"
+    },
+    "q3": {
+      "text": "When you encounter a concept you don't understand, what do you do?",
+      "options": [
+        "I keep trying until it makes sense",
+        "I look for different explanations or resources",
+        "I connect it to things I already know",
+        "I ask someone to explain it to me"
+      ]
+    },
+    "q4": {
+      "text": "When faced with a complex problem, how do you approach it?",
+      "options": [
+        "I trust my gut instinct",
+        "I break it down into smaller parts",
+        "I gather data and analyze systematically",
+        "I consider multiple perspectives first"
+      ]
+    },
+    "q5": {
+      "text": "How often do you question your own assumptions and beliefs?"
+    },
+    "q6": {
+      "text": "When presented with conflicting information, how do you decide what to believe?",
+      "options": [
+        "I go with what feels most accurate",
+        "I evaluate the credibility of sources",
+        "I look for supporting evidence",
+        "I seek out expert opinions"
+      ]
+    },
+    "q7": {
+      "text": "How comfortable are you expressing your ideas to others?"
+    },
+    "q8": {
+      "text": "When communicating important information, how do you ensure it's understood?",
+      "options": [
+        "I explain it in detail",
+        "I use examples and analogies",
+        "I check for understanding regularly",
+        "I adapt my style to the listener"
+      ]
+    },
+    "q9": {
+      "text": "How well do you listen to others during conversations?"
+    },
+    "q10": {
+      "text": "When someone shares a problem with you, what's your first response?",
+      "options": [
+        "I offer solutions immediately",
+        "I acknowledge their feelings first",
+        "I ask how I can help",
+        "I share a similar experience I've had"
+      ]
+    },
+    "q11": {
+      "text": "How accurately can you perceive how others are feeling?"
+    },
+    "q12": {
+      "text": "When you disagree with someone, how do you typically respond?",
+      "options": [
+        "I state my position clearly",
+        "I try to understand their perspective first",
+        "I look for common ground",
+        "I postpone the discussion if emotions are high"
+      ]
+    },
+    "q13": {
+      "text": "How well do you understand your own emotional triggers?"
+    },
+    "q14": {
+      "text": "When you make a mistake, how do you typically react?",
+      "options": [
+        "I feel defensive or embarrassed",
+        "I acknowledge it and move on",
+        "I reflect on what I can learn",
+        "I seek feedback to improve"
+      ]
+    },
+    "q15": {
+      "text": "How often do you reflect on your personal growth and development?"
+    },
+    "q16": {
+      "text": "How often are you fully present in the moment rather than thinking about past or future?"
+    },
+    "q17": {
+      "text": "When you feel stressed or overwhelmed, what helps you the most?",
+      "options": [
+        "Taking action to address the stressor",
+        "Talking to someone about it",
+        "Physical activity or exercise",
+        "Quiet reflection or meditation"
+      ]
+    },
+    "q18": {
+      "text": "How well can you maintain focus on a single task without getting distracted?"
+    },
+    "q19": {
+      "text": "When you face a setback, how quickly do you recover?"
+    },
+    "q20": {
+      "text": "After a failure, what's your typical mindset?",
+      "options": [
+        "I dwell on what went wrong",
+        "I need time before trying again",
+        "I see it as a learning opportunity",
+        "I'm motivated to prove I can do it"
+      ]
+    },
+    "q21": {
+      "text": "How do you handle situations that are outside your comfort zone?"
+    },
+    "q22": {
+      "text": "How consistent are you in practicing skills you want to improve?"
+    },
+    "q23": {
+      "text": "How do you approach setting and achieving personal development goals?",
+      "options": [
+        "I set goals but struggle to follow through",
+        "I take it day by day without formal goals",
+        "I set specific goals and track progress",
+        "I adjust my goals based on circumstances"
+      ]
+    },
+    "q24": {
+      "text": "How confident do you feel in your ability to develop new skills over time?"
+    }
+  }
+}

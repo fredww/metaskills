@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "title": "MetaSkills - Aprende habilidades que nunca caducan",
+    "description": "Domina meta-habilidades como el pensamiento crítico, la inteligencia emocional y la adaptabilidad. Tu ventaja competitiva de por vida en un mundo de cambio rápido."
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "skills": "Habilidades",
+    "assessment": "Evaluación",
+    "practices": "Prácticas",
+    "journal": "Diario",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión"
+  },
+  "hero": {
+    "badge": "El sistema operativo de capacidades humanas",
+    "title": "Aprende habilidades que",
+    "titleHighlight": "nunca caducan",
+    "subtitle": "En un mundo donde las habilidades técnicas se vuelven obsoletas cada 5 años, las meta-habilidades — la capacidad de aprender, pensar, adaptarse y entenderte a ti mismo y a los demás — son tu ventaja competitiva de por vida.",
+    "cta": {
+      "primary": "Comienza tu evaluación",
+      "secondary": "Explora el framework"
+    },
+    "trust": {
+      "evidence": "Basado en evidencia",
+      "privacy": "Privacidad primero",
+      "human": "Centrado en humanos"
+    }
+  },
+  "footer": {
+    "tagline": "Aprende habilidades que nunca caducan. Construye una base para el crecimiento de por vida.",
+    "links": {
+      "product": "Producto",
+      "company": "Empresa",
+      "resources": "Recursos",
+      "legal": "Legal"
+    },
+    "items": {
+      "assessment": "Evaluación",
+      "skills": "Meta-Habilidades",
+      "practices": "Prácticas",
+      "pricing": "Precios",
+      "about": "Acerca de",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "privacy": "Privacidad",
+      "terms": "Términos"
+    },
+    "copyright": "© 2025 MetaSkills.ai. Todos los derechos reservados.",
+    "madeWith": "Hecho con ❤️ para aprendices de por vida"
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión para continuar tu viaje de aprendizaje",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "button": "Iniciar sesión",
+      "noAccount": "¿No tienes cuenta?",
+      "signUp": "Registrarse",
+      "forgotPassword": "¿Olvidaste tu contraseña?"
+    },
+    "signup": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Comienza tu viaje hacia el dominio de las meta-habilidades",
+      "name": "Nombre completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "agree": "Estoy de acuerdo con",
+      "terms": "Términos de servicio",
+      "privacy": "Política de privacidad",
+      "button": "Crear cuenta",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Iniciar sesión"
+    }
+  },
+  "assessment": {
+    "title": "Descubre tu perfil de meta-habilidades",
+    "subtitle": "Realiza nuestra evaluación integral para entender tus capacidades actuales",
+    "start": "Comenzar evaluación",
+    "duration": "Toma unos 15 minutos",
+    "questions": "48 preguntas",
+    "flow": {
+      "questionOf": "Pregunta {current} de {total}",
+      "complete": "{percent}% completado",
+      "back": "← Volver",
+      "skip": "Omitir →",
+      "ratingHint": "<strong>1</strong> = Nada como yo &nbsp;&nbsp;&nbsp; <strong>5</strong> = Muy como yo"
+    },
+    "welcome": {
+      "title": "Descubre tu perfil de meta-habilidades",
+      "subtitle": "Realiza nuestra evaluación integral para descubrir tu paisaje único de capacidades",
+      "features": {
+        "questions": {
+          "title": "24 Preguntas Reflexivas",
+          "description": "Preguntas cuidadosamente diseñadas explorando tus habilidades cognitivas, interpersonales y de desarrollo personal"
+        },
+        "duration": {
+          "title": "Toma 10-15 Minutos",
+          "description": "Completa a tu propio ritmo con nuestro flujo intuitivo de una pregunta a la vez"
+        },
+        "results": {
+          "title": "Mapa de Resultados Personalizado",
+          "description": "Obtén una visualización detallada de tus capacidades en 8 dominios de meta-habilidades"
+        },
+        "recommendations": {
+          "title": "Recomendaciones de Práctica Personalizadas",
+          "description": "Recibe sugerencias de práctica personalizadas basadas en tu perfil único"
+        }
+      },
+      "discover": {
+        "title": "Lo que descubrirás:",
+        "cognitive": "Tus niveles de capacidad cognitiva (Aprendizaje, Pensamiento Crítico)",
+        "interpersonal": "Fortalezas de habilidades interpersonales (Comunicación, Empatía)",
+        "self": "Áreas de desarrollo personal (Autoconciencia, Atención Plena, Resiliencia)",
+        "stage": "Tu etapa actual de desarrollo (Principiante → Maestro)",
+        "growth": "Vectores de crecimiento que muestran tus áreas de enfoque"
+      },
+      "start": "Comenzar evaluación",
+      "backToDashboard": "Volver al Panel"
+    }
+  },
+  "skills": {
+    "title": "Framework de meta-habilidades",
+    "subtitle": "Domina las habilidades que impulsan todos los demás aprendizajes",
+    "domains": {
+      "cognitive": {
+        "title": "Habilidades cognitivas",
+        "description": "Piensa críticamente, resuelve problemas y toma mejores decisiones"
+      },
+      "interpersonal": {
+        "title": "Habilidades interpersonales",
+        "description": "Construye relaciones fuertes y comunícate efectivamente"
+      },
+      "self": {
+        "title": "Autogestión",
+        "description": "Entiéndete y navega la vida con propósito"
+      }
+    }
+  },
+  "language": {
+    "switch": "Cambiar idioma",
+    "current": "Idioma actual",
+    "select": "Selecciona tu idioma preferido"
+  },
+  "framework": {
+    "label": "El Framework",
+    "title": "Tres sistemas, un sistema operativo",
+    "subtitle": "Todas las capacidades humanas pueden organizarse en tres sistemas interconectados.",
+    "cognitive": {
+      "title": "Sistema cognitivo",
+      "description": "Cómo entiendes el mundo, aprendes, piensas y tomas decisiones.",
+      "skills": {
+        "learning": "Aprender a aprender",
+        "thinking": "Pensamiento crítico",
+        "systems": "Pensamiento sistémico",
+        "decision": "Toma de decisiones"
+      }
+    },
+    "interpersonal": {
+      "title": "Sistema interpersonal",
+      "description": "Cómo entiendes a otros, construyes relaciones, te comunicas y colaboras.",
+      "skills": {
+        "emotional": "Inteligencia emocional",
+        "communication": "Comunicación",
+        "empathy": "Empatía",
+        "collaboration": "Colaboración"
+      }
+    },
+    "self": {
+      "title": "Sistema personal",
+      "description": "Cómo gestionas tu mundo interior.",
+      "skills": {
+        "awareness": "Autoconciencia",
+        "regulation": "Regulación emocional",
+        "resilience": "Resiliencia",
+        "mindfulness": "Atención plena"
+      }
+    },
+    "viewComplete": "Ver mapa completo de habilidades"
+  },
+  "why": {
+    "label": "El Por qué",
+    "title": "Por qué las meta-habilidades",
+    "titleHighlight": "son más importantes que nunca",
+    "subtitle": "Estamos experimentando una aceleración sin precedentes del cambio.",
+    "description": "Las capacidades humanas fundamentales de aprender, pensar y adaptarse solo aumentarán en valor.",
+    "benefits": {
+      "automation": {
+        "title": "Haz tu carrera a prueba de automatización",
+        "description": "La IA excel en tareas repetitivas. Los humanos excelen en la creatividad."
+      },
+      "wellbeing": {
+        "title": "Construye una base para el bienestar",
+        "description": "La investigación muestra que las meta-habilidades correlacionan fuertemente con la satisfacción vital."
+      },
+      "universal": {
+        "title": "Mantente universalmente relevante",
+        "description": "Estas capacidades son valoradas en cada cultura."
+      }
+    },
+    "chart": {
+      "title": "Valor de habilidades a lo largo del tiempo",
+      "technical": {
+        "label": "Habilidades técnicas",
+        "trend": "↓ En declive",
+        "description": "Pierden relevancia con el progreso tecnológico"
+      },
+      "meta": {
+        "label": "Meta-habilidades",
+        "trend": "↑ Creciendo",
+        "description": "Se componen en valor a lo largo de tu carrera"
+      },
+      "quote": "La capacidad de aprender más rápido que tus competidores es tu única ventaja competitiva sostenible.",
+      "attribution": "— Arie de Geus, Royal Dutch Shell"
+    }
+  },
+  "approach": {
+    "label": "El Enfoque",
+    "title": "Una forma diferente de aprender",
+    "subtitle": "No es una plataforma de cursos. Es un espacio tranquilo para la reflexión y la práctica.",
+    "microlearning": {
+      "emoji": "🌿",
+      "title": "Microaprendizaje",
+      "description": "Prácticas de 5 a 10 minutos. Sin cursos abrumadores."
+    },
+    "nonLinear": {
+      "emoji": "🧭",
+      "title": "Caminos no lineales",
+      "description": "Sigue lo que resuene. Ningún orden prescrito."
+    },
+    "practice": {
+      "emoji": "📓",
+      "title": "Práctica y reflexión",
+      "description": "El conocimiento solo no es transformación."
+    },
+    "ai": {
+      "emoji": "🤖",
+      "title": "Reflexión guiada por IA",
+      "description": "Un compañero IA reflexivo te ayuda a ver patrones."
+    },
+    "calm": {
+      "emoji": "🌙",
+      "title": "Experiencia tranquila",
+      "description": "Interfaces sin distracción. Modo oscuro disponible."
+    },
+    "longterm": {
+      "emoji": "🪴",
+      "title": "Crecimiento a largo plazo",
+      "description": "Medimos el progreso en años, no en días."
+    }
+  },
+  "start": {
+    "label": "Puntos de entrada",
+    "title": "Comienza donde estás",
+    "subtitle": "No se necesita preparación. Aparece tal como eres.",
+    "assessment": {
+      "title": "Evaluación de meta-habilidades",
+      "description": "Toma 10 minutos para reflexionar sobre tus capacidades actuales.",
+      "cta": "Comenzar evaluación"
+    },
+    "practice": {
+      "title": "Práctica de 5 minutos",
+      "description": "Un ejercicio simple que puedes hacer ahora.",
+      "cta": "Probar una práctica"
+    },
+    "calm": {
+      "title": "Modo de aprendizaje tranquilo",
+      "description": "Entra en nuestro espacio de lectura sin distracción.",
+      "cta": "Entrar en espacio tranquilo"
+    }
+  },
+  "philosophy": {
+    "label": "Nuestra filosofía",
+    "title": "Esta no es otra plataforma para hacerte más productivo",
+    "subtitle": "Existimos para ayudarte a construir un sistema interno anclado y adaptativo.",
+    "believe": {
+      "title": "En qué creemos",
+      "awareness": "La conciencia es más importante que el rendimiento",
+      "development": "El desarrollo es más importante que la comparación",
+      "structure": "La estructura ofrece más valor que los puntajes",
+      "longterm": "El crecimiento a largo plazo supera la eficiencia a corto plazo"
+    },
+    "reject": {
+      "title": "Lo que rechazamos",
+      "hustle": "Cultura del hustle y agotamiento",
+      "gamification": "Gamificación agresiva",
+      "ranking": "Clasificación y comparación",
+      "optimization": "Tratar a los humanos como problemas de optimización"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Acerca de MetaSkills",
+      "subtitle": "Empoderar a individuos para dominar habilidades fundamentales"
+    },
+    "mission": {
+      "title": "Nuestra misión",
+      "paragraph1": "En MetaSkills, creemos que las habilidades más valiosas son las que te ayudan a aprender todo lo demás.",
+      "paragraph2": "Nuestra plataforma proporciona evaluaciones personalizadas y prácticas guiadas."
+    },
+    "whatWeOffer": {
+      "title": "Lo que ofrecemos",
+      "assessment": {
+        "emoji": "📊",
+        "title": "Evaluación personalizada",
+        "description": "Descubre tu perfil actual de meta-habilidades"
+      },
+      "practices": {
+        "emoji": "🎯",
+        "title": "Prácticas guiadas",
+        "description": "Accede a ejercicios probados"
+      },
+      "tracking": {
+        "emoji": "📈",
+        "title": "Seguimiento del progreso",
+        "description": "Monitorea tu crecimiento a lo largo del tiempo"
+      }
+    },
+    "metaSkills": {
+      "title": "Las 8 meta-habilidades",
+      "intro": "Nuestra plataforma se enfoca en ocho meta-habilidades fundamentales:",
+      "learning": {
+        "title": "Aprender a aprender",
+        "description": "Adquirir eficazmente nuevos conocimientos"
+      },
+      "thinking": {
+        "title": "Pensamiento crítico",
+        "description": "Analizar información y tomar juicios sólidos"
+      },
+      "communication": {
+        "title": "Comunicación",
+        "description": "Intercambiar ideas eficazmente"
+      },
+      "empathy": {
+        "title": "Empatía",
+        "description": "Entender y compartir los sentimientos de otros"
+      },
+      "awareness": {
+        "title": "Autoconciencia",
+        "description": "Entender tus propios pensamientos"
+      },
+      "mindfulness": {
+        "title": "Atención plena",
+        "description": "Permanecer presente y concentrado"
+      },
+      "resilience": {
+        "title": "Resiliencia",
+        "description": "Rebotar después de los reveses"
+      },
+      "emotional": {
+        "title": "Inteligencia emocional",
+        "description": "Reconocer y gestionar eficazmente las emociones"
+      }
+    },
+    "approach": {
+      "title": "Nuestro enfoque",
+      "science": {
+        "emoji": "🔬",
+        "title": "Basado en ciencia",
+        "description": "Nuestro framework está anclado en investigación psicológica."
+      },
+      "action": {
+        "emoji": "🎯",
+        "title": "Orientado a la acción",
+        "description": "Nos enfocamos en ejercicios prácticos."
+      },
+      "progress": {
+        "emoji": "📊",
+        "title": "Orientado al progreso",
+        "description": "El desarrollo es un viaje, no un destino."
+      }
+    },
+    "cta": {
+      "title": "Comienza tu viaje hoy",
+      "description": "Descubre tu perfil de meta-habilidades",
+      "assessment": "Realizar evaluación",
+      "skills": "Explorar habilidades"
+    }
+  },
+  "questions": {
+    "q1": {
+      "text": "Cuando necesitas aprender algo nuevo, ¿cómo sueles abordarlo?",
+      "options": [
+        "Me sumerjo inmediatamente y aprendo haciendo",
+        "Investigo a fondo primero, luego practico",
+        "Busco cursos estructurados o guía",
+        "Lo descompongo en pequeños pasos manejables"
+      ]
+    },
+    "q2": {
+      "text": "¿Qué tan rápido te adaptas a nueva información o circunstancias cambiantes?"
+    },
+    "q3": {
+      "text": "Cuando encuentras un concepto que no entiendes, ¿qué haces?",
+      "options": [
+        "Sigo intentando hasta que tenga sentido",
+        "Busco diferentes explicaciones o recursos",
+        "Lo conecto con cosas que ya conozco",
+        "Pido a alguien que me lo explique"
+      ]
+    },
+    "q4": {
+      "text": "Cuando enfrentas un problema complejo, ¿cómo lo abordas?",
+      "options": [
+        "Confío en mi instinto",
+        "Lo descompongo en partes más pequeñas",
+        "Recolecto datos y analizo sistemáticamente",
+        "Considero múltiples perspectivas primero"
+      ]
+    },
+    "q5": {
+      "text": "¿Con qué frecuencia cuestionas tus propios supuestos y creencias?"
+    },
+    "q6": {
+      "text": "Cuando se presenta información conflictiva, ¿cómo decides qué creer?",
+      "options": [
+        "Voy con lo que se siente más preciso",
+        "Evalúo la credibilidad de las fuentes",
+        "Busco evidencia de respaldo",
+        "Busco opiniones de expertos"
+      ]
+    },
+    "q7": {
+      "text": "¿Qué tan cómodo te sientes expresando tus ideas a otros?"
+    },
+    "q8": {
+      "text": "Cuando comunicas información importante, ¿cómo aseguras que se entienda?",
+      "options": [
+        "Lo explico en detalle",
+        "Uso ejemplos y analogías",
+        "Verifico la comprensión regularmente",
+        "Adapto mi estilo al oyente"
+      ]
+    },
+    "q9": {
+      "text": "¿Qué tan bien escuchas a otros durante las conversaciones?"
+    },
+    "q10": {
+      "text": "Cuando alguien comparte un problema contigo, ¿cuál es tu primera respuesta?",
+      "options": [
+        "Ofrezco soluciones inmediatamente",
+        "Reconozco sus sentimientos primero",
+        "Pregunto cómo puedo ayudar",
+        "Comparto una experiencia similar que he tenido"
+      ]
+    },
+    "q11": {
+      "text": "¿Qué tan precisamente puedes percibir cómo se sienten los demás?"
+    },
+    "q12": {
+      "text": "Cuando no estás de acuerdo con alguien, ¿cómo sueles responder?",
+      "options": [
+        "Expongo mi posición claramente",
+        "Trato de entender su perspectiva primero",
+        "Busco terreno común",
+        "Pospongo la discusión si las emociones están altas"
+      ]
+    },
+    "q13": {
+      "text": "¿Qué tan bien entiendes tus propios detonantes emocionales?"
+    },
+    "q14": {
+      "text": "Cuando cometes un error, ¿cómo sueles reaccionar?",
+      "options": [
+        "Me siento a la defensiva o avergonzado",
+        "Lo reconozco y sigo adelante",
+        "Reflexiono sobre lo que puedo aprender",
+        "Busco retroalimentación para mejorar"
+      ]
+    },
+    "q15": {
+      "text": "¿Con qué frecuencia reflexionas sobre tu crecimiento y desarrollo personal?"
+    },
+    "q16": {
+      "text": "¿Con qué frecuencia estás completamente presente en el momento en lugar de pensar en el pasado o futuro?"
+    },
+    "q17": {
+      "text": "Cuando te sientes estresado o abrumado, ¿qué te ayuda más?",
+      "options": [
+        "Tomar acción para abordar el factor estresante",
+        "Hablar con alguien al respecto",
+        "Actividad física o ejercicio",
+        "Reflexión tranquila o meditación"
+      ]
+    },
+    "q18": {
+      "text": "¿Qué tan bien puedes mantener el enfoque en una sola tarea sin distraerte?"
+    },
+    "q19": {
+      "text": "Cuando enfrentas un revés, ¿qué tan rápido te recuperas?"
+    },
+    "q20": {
+      "text": "Después de un fracaso, ¿cuál es tu mentalidad típica?",
+      "options": [
+        "Me quedo pensando en lo que salió mal",
+        "Necesito tiempo antes de intentar de nuevo",
+        "Lo veo como una oportunidad de aprendizaje",
+        "Estoy motivado de demostrar que puedo hacerlo"
+      ]
+    },
+    "q21": {
+      "text": "¿Cómo manejas situaciones que están fuera de tu zona de confort?"
+    },
+    "q22": {
+      "text": "¿Qué tan consistente eres practicando habilidades que quieres mejorar?"
+    },
+    "q23": {
+      "text": "¿Cómo abordas el establecimiento y logro de metas de desarrollo personal?",
+      "options": [
+        "Establezco metas pero lucho por seguirlas",
+        "Lo tomo día a día sin metas formales",
+        "Establezco metas específicas y rastreo el progreso",
+        "Ajusto mis metas según las circunstancias"
+      ]
+    },
+    "q24": {
+      "text": "¿Qué tan confiado te sientes en tu capacidad de desarrollar nuevas habilidades con el tiempo?"
+    }
+  }
+}

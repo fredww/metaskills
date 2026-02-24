@@ -1,18 +1,23 @@
-import Link from "next/link"
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/routing'
 
 export default function AboutPage() {
+  const t = useTranslations('about')
+
   return (
     <div className="min-h-screen bg-[#FDFBF7]">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#8DA399]/10 via-[#D4AF37]/10 to-[#C7826B]/10 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#2D2D2D] mb-6">
-            About MetaSkills
+            {t('hero.title')}
           </h1>
           <p className="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            Empowering individuals to master the fundamental skills that unlock all other capabilities
+            {t('hero.subtitle')}
           </p>
         </div>
       </div>
@@ -21,14 +26,14 @@ export default function AboutPage() {
         {/* Mission */}
         <section className="mb-16">
           <h2 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-6">
-            Our Mission
+            {t('mission.title')}
           </h2>
           <div className="bg-white rounded-3xl p-8 border border-[#E5E0D8]">
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              At MetaSkills, we believe that the most valuable skills you can develop are the ones that help you learn everything else. These meta-skills—learning to learn, critical thinking, emotional intelligence, and more—are the foundation of personal and professional growth.
+              {t('mission.paragraph1')}
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Our platform provides personalized assessments, guided practices, and progress tracking to help you master these fundamental capabilities and apply them in every area of your life.
+              {t('mission.paragraph2')}
             </p>
           </div>
         </section>
@@ -36,39 +41,39 @@ export default function AboutPage() {
         {/* What We Offer */}
         <section className="mb-16">
           <h2 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-6">
-            What We Offer
+            {t('whatWeOffer.title')}
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="border-[#E5E0D8] hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">📊</div>
+                <div className="text-4xl mb-4">{t('whatWeOffer.assessment.emoji')}</div>
                 <h3 className="font-semibold text-[#2D2D2D] mb-2">
-                  Personalized Assessment
+                  {t('whatWeOffer.assessment.title')}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  Discover your current meta-skills profile with our comprehensive assessment
+                  {t('whatWeOffer.assessment.description')}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[#E5E0D8] hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">🎯</div>
+                <div className="text-4xl mb-4">{t('whatWeOffer.practices.emoji')}</div>
                 <h3 className="font-semibold text-[#2D2D2D] mb-2">
-                  Guided Practices
+                  {t('whatWeOffer.practices.title')}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  Access proven exercises and techniques to develop each meta-skill
+                  {t('whatWeOffer.practices.description')}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[#E5E0D8] hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">📈</div>
+                <div className="text-4xl mb-4">{t('whatWeOffer.tracking.emoji')}</div>
                 <h3 className="font-semibold text-[#2D2D2D] mb-2">
-                  Progress Tracking
+                  {t('whatWeOffer.tracking.title')}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  Monitor your growth over time with detailed insights and analytics
+                  {t('whatWeOffer.tracking.description')}
                 </p>
               </CardContent>
             </Card>
@@ -78,67 +83,67 @@ export default function AboutPage() {
         {/* The 8 Meta-Skills */}
         <section className="mb-16">
           <h2 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-6">
-            The 8 Meta-Skills
+            {t('metaSkills.title')}
           </h2>
           <div className="bg-white rounded-3xl p-8 border border-[#E5E0D8]">
             <p className="text-gray-700 mb-6">
-              Our platform focuses on eight fundamental meta-skills that form the foundation of personal effectiveness:
+              {t('metaSkills.intro')}
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex items-start gap-3">
                 <span className="text-[#8DA399] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Learning to Learn</h4>
-                  <p className="text-sm text-gray-600">Acquire new knowledge and skills efficiently</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.learning.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.learning.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#8DA399] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Critical Thinking</h4>
-                  <p className="text-sm text-gray-600">Analyze information and make sound judgments</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.thinking.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.thinking.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#C7826B] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Communication</h4>
-                  <p className="text-sm text-gray-600">Exchange ideas effectively and build understanding</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.communication.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.communication.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#C7826B] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Empathy</h4>
-                  <p className="text-sm text-gray-600">Understand and share the feelings of others</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.empathy.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.empathy.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#D4AF37] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Self-Awareness</h4>
-                  <p className="text-sm text-gray-600">Understand your own thoughts and behaviors</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.awareness.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.awareness.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#D4AF37] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Mindfulness</h4>
-                  <p className="text-sm text-gray-600">Stay present and focused in the moment</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.mindfulness.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.mindfulness.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#D4AF37] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Resilience</h4>
-                  <p className="text-sm text-gray-600">Bounce back from setbacks and challenges</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.resilience.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.resilience.description')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-[#C7826B] text-xl">✓</span>
                 <div>
-                  <h4 className="font-semibold text-[#2D2D2D]">Emotional Intelligence</h4>
-                  <p className="text-sm text-gray-600">Recognize and manage emotions effectively</p>
+                  <h4 className="font-semibold text-[#2D2D2D]">{t('metaSkills.emotional.title')}</h4>
+                  <p className="text-sm text-gray-600">{t('metaSkills.emotional.description')}</p>
                 </div>
               </div>
             </div>
@@ -148,30 +153,30 @@ export default function AboutPage() {
         {/* Our Approach */}
         <section className="mb-16">
           <h2 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-6">
-            Our Approach
+            {t('approach.title')}
           </h2>
           <div className="space-y-4">
             <Card className="border-[#8DA399] bg-[#8DA399]/5">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#2D2D2D] mb-2">🔬 Science-Based</h3>
+                <h3 className="font-semibold text-[#2D2D2D] mb-2">{t('approach.science.emoji')} {t('approach.science.title')}</h3>
                 <p className="text-gray-700">
-                  Our framework is grounded in psychological research and learning science, ensuring techniques that are proven to work.
+                  {t('approach.science.description')}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[#D4AF37] bg-[#D4AF37]/5">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#2D2D2D] mb-2">🎯 Action-Oriented</h3>
+                <h3 className="font-semibold text-[#2D2D2D] mb-2">{t('approach.action.emoji')} {t('approach.action.title')}</h3>
                 <p className="text-gray-700">
-                  We focus on practical exercises and real-world applications, not just theory. Every skill comes with actionable practices.
+                  {t('approach.action.description')}
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[#C7826B] bg-[#C7826B]/5">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-[#2D2D2D] mb-2">📊 Progress-Focused</h3>
+                <h3 className="font-semibold text-[#2D2D2D] mb-2">{t('approach.progress.emoji')} {t('approach.progress.title')}</h3>
                 <p className="text-gray-700">
-                  Development is a journey, not a destination. We help you track progress and celebrate growth over time.
+                  {t('approach.progress.description')}
                 </p>
               </CardContent>
             </Card>
@@ -183,10 +188,10 @@ export default function AboutPage() {
           <Card className="border-[#8DA399] bg-[#8DA399]/5">
             <CardContent className="p-12">
               <h2 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-4">
-                Start Your Journey Today
+                {t('cta.title')}
               </h2>
               <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-                Discover your meta-skills profile and begin your personalized development journey
+                {t('cta.description')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -195,7 +200,7 @@ export default function AboutPage() {
                   className="bg-[#8DA399] hover:bg-[#6B8379] text-white"
                 >
                   <Link href="/assessment">
-                    Take Assessment
+                    {t('cta.assessment')}
                   </Link>
                 </Button>
                 <Button
@@ -205,7 +210,7 @@ export default function AboutPage() {
                   className="border-[#E5E0D8] text-[#2D2D2D] hover:bg-[#F3EFE9]"
                 >
                   <Link href="/skills">
-                    Explore Skills
+                    {t('cta.skills')}
                   </Link>
                 </Button>
               </div>

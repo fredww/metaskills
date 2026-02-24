@@ -1,11 +1,14 @@
 "use client"
 
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useSession, signOut } from "next-auth/react"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { Link } from "@/i18n/routing"
+import { useTranslations } from 'next-intl'
 
 export function Header() {
   const { data: session } = useSession()
+  const t = useTranslations('nav')
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -65,40 +68,42 @@ export function Header() {
             href="/skills"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
-            Meta-Skills
+            {t('skills')}
           </Link>
           <Link
             href="/assessment"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
-            Assessment
+            {t('assessment')}
           </Link>
           <Link
             href="/practices"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
-            Practices
+            {t('practices')}
           </Link>
           <Link
             href="/about"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
-            About
+            {t('about')}
           </Link>
         </nav>
 
-        {/* Auth Buttons */}
+        {/* Right Section: Language Switcher + Auth Buttons */}
         <div className="flex items-center gap-4">
+          {/* Language Switcher */}
+          <LanguageSwitcher />
           {session?.user ? (
             <>
               <Link href="/dashboard">
                 <Button variant="ghost" size="sm">
-                  Dashboard
+                  {t('dashboard')}
                 </Button>
               </Link>
               <Link href="/profile">
                 <Button variant="outline" size="sm" className="border-[#E5E0D8] text-[#2D2D2D] hover:bg-[#F3EFE9]">
-                  Profile
+                  {t('profile')}
                 </Button>
               </Link>
               <Button
@@ -106,19 +111,19 @@ export function Header() {
                 size="sm"
                 onClick={() => signOut({ callbackUrl: '/' })}
               >
-                Sign Out
+                {t('logout')}
               </Button>
             </>
           ) : (
             <>
               <Link href="/login">
                 <Button variant="ghost" size="sm">
-                  Log In
+                  {t('login')}
                 </Button>
               </Link>
               <Link href="/signup">
                 <Button size="sm" className="bg-[#8DA399] hover:bg-[#6B8379]">
-                  Sign Up
+                  {t('signup')}
                 </Button>
               </Link>
             </>

@@ -1,19 +1,36 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { assessmentQuestions } from "@/lib/assessment-questions"
+import { questionTemplates, type Question } from "@/lib/assessment-questions"
+import { useTranslations } from 'next-intl'
 
 export default function AssessmentFlowPage() {
   const router = useRouter()
+  const t = useTranslations('assessment.flow')
+  const tq = useTranslations('questions')
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | number>>({})
 
-  const currentQuestion = assessmentQuestions[currentQuestionIndex]
-  const progress = ((currentQuestionIndex) / assessmentQuestions.length) * 100
-  const isLastQuestion = currentQuestionIndex === assessmentQuestions.length - 1
+  // Build questions with translations
+  const questions = useMemo(() => {
+    return questionTemplates.map((template) => {
+      const questionText = tq(`${template.id}.text`)
+      const optionsText = template.type === 'choice' ? tq.raw(`${template.id}.options`) as string[] : undefined
+
+      return {
+        ...template,
+        text: questionText,
+        options: optionsText
+      }
+    })
+  }, [tq])
+
+  const currentQuestion = questions[currentQuestionIndex]
+  const progress = ((currentQuestionIndex) / questions.length) * 100
+  const isLastQuestion = currentQuestionIndex === questions.length - 1
 
   const handleAnswer = (answer: string | number) => {
     const newAnswers = { ...answers, [currentQuestion.id]: answer }
@@ -43,10 +60,10 @@ export default function AssessmentFlowPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-gray-600">
-              Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
+              {t('questionOf', { current: currentQuestionIndex + 1, total: questions.length })}
             </span>
             <span className="text-sm font-medium text-[#8DA399]">
-              {Math.round(progress)}% Complete
+              {t('complete', { percent: Math.round(progress) })}
             </span>
           </div>
           <div className="w-full bg-[#E5E0D8] rounded-full h-2">
@@ -107,7 +124,7 @@ export default function AssessmentFlowPage() {
                 variant="outline"
                 className="border-[#E5E0D8] text-[#2D2D2D] hover:bg-[#F3EFE9]"
               >
-                ← Back
+                {t('back')}
               </Button>
               <Button
                 onClick={() => {
@@ -122,17 +139,14 @@ export default function AssessmentFlowPage() {
                 variant="ghost"
                 className="text-gray-500 hover:text-gray-700"
               >
-                Skip →
+                {t('skip')}
               </Button>
             </div>
 
             {/* Rating Scale Hint */}
             {currentQuestion.type === "rating" && (
               <div className="mt-6 p-4 bg-[#F3EFE9] rounded-lg">
-                <p className="text-sm text-gray-600 text-center">
-                  <strong>1</strong> = Not at all like me &nbsp;&nbsp;&nbsp;
-                  <strong>5</strong> = Very much like me
-                </p>
+                <p className="text-sm text-gray-600 text-center" dangerouslySetInnerHTML={{ __html: t('ratingHint') }} />
               </div>
             )}
           </CardContent>
