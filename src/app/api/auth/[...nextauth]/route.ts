@@ -40,13 +40,29 @@ const authOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          image: user.image
+          image: user.image,
+          role: user.role
         }
       }
     })
   ],
   pages: {
     signIn: "/login"
+  },
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.role = user.role
+      }
+      return token
+    },
+    async session({ session, token }: any) {
+      if (session?.user) {
+        session.user.id = token.sub!
+        session.user.role = token.role
+      }
+      return session
+    }
   }
 }
 

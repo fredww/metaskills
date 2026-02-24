@@ -8,6 +8,7 @@ import { Book, Wrench, ExternalLink, TrendingUp } from 'lucide-react'
 import Image from 'next/image'
 import AdminLayout from '@/components/admin/AdminLayout'
 import Pagination from '@/components/admin/Pagination'
+import { AffiliateLink } from '@/components/resources/AffiliateLink'
 
 const ITEMS_PER_PAGE = 10
 
@@ -88,9 +89,9 @@ export default function ResourcesManagementClient({
 
   return (
     <AdminLayout>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full overflow-x-hidden">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 max-w-full">
           <h1 className="text-3xl font-serif font-bold text-[#2D2D2D] mb-2">
             资源管理
           </h1>
@@ -100,7 +101,7 @@ export default function ResourcesManagementClient({
         </div>
 
         {/* Statistics */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-4 gap-6 mb-8 max-w-full">
           <Card className="border-[#E5E0D8]">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2">
@@ -155,7 +156,7 @@ export default function ResourcesManagementClient({
         </div>
 
         {/* Tabs and Search */}
-        <Card className="border-[#E5E0D8] mb-6">
+        <Card className="border-[#E5E0D8] mb-6 max-w-full">
           <CardContent className="pt-6">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
               <div className="flex gap-2">
@@ -191,7 +192,7 @@ export default function ResourcesManagementClient({
         </Card>
 
         {/* Resources List */}
-        <Card className="border-[#E5E0D8]">
+        <Card className="border-[#E5E0D8] max-w-full">
           <CardHeader>
             <CardTitle className="text-xl font-serif text-[#2D2D2D]">
               {activeTab === 'books' ? '书籍列表' : '工具列表'} ({currentResources.length})
@@ -205,7 +206,7 @@ export default function ResourcesManagementClient({
                   return (
                     <div
                       key={book.url}
-                      className="flex items-center gap-4 p-4 bg-[#FDFBF7] rounded-lg hover:bg-[#F3EFE9] transition-colors"
+                      className="flex items-center gap-4 p-4 bg-[#FDFBF7] rounded-lg hover:bg-[#F3EFE9] transition-colors min-w-0"
                     >
                       {/* Cover */}
                       <div className="w-16 h-20 rounded bg-gray-200 overflow-hidden flex-shrink-0">
@@ -221,20 +222,20 @@ export default function ResourcesManagementClient({
                       </div>
 
                       {/* Info */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-[#2D2D2D] mb-1 truncate">
-                          {book.title}
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <h4 className="font-semibold text-[#2D2D2D] mb-1" title={book.title}>
+                          {book.title.length > 80 ? book.title.substring(0, 80) + '...' : book.title}
                         </h4>
-                        <p className="text-sm text-gray-600 mb-2">
+                        <p className="text-sm text-gray-600 mb-2 truncate" title={book.author}>
                           {book.author}
                         </p>
                         <div className="flex gap-4 text-xs text-gray-500">
-                          <span>{book.skillCode.replace('-', ' ')}</span>
+                          <span className="truncate">{book.skillCode.replace('-', ' ')}</span>
                         </div>
                       </div>
 
                       {/* Stats */}
-                      <div className="flex gap-6 text-sm text-gray-600">
+                      <div className="flex gap-6 text-sm text-gray-600 flex-shrink-0">
                         <div className="text-center">
                           <div className="font-bold text-[#2D2D2D]">
                             {book._count.resourceClicks}
@@ -250,17 +251,20 @@ export default function ResourcesManagementClient({
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-2">
-                        <Button
-                          asChild
-                          variant="outline"
-                          size="sm"
-                          className="border-[#8DA399] text-[#8DA399] hover:bg-[#F3EFE9]"
+                      <div className="flex gap-2 flex-shrink-0">
+                        <AffiliateLink
+                          href={book.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <Link href={`/resources/book/${book.url}`}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-[#8DA399] text-[#8DA399] hover:bg-[#F3EFE9]"
+                          >
                             查看详情
-                          </Link>
-                        </Button>
+                          </Button>
+                        </AffiliateLink>
                       </div>
                     </div>
                   )
@@ -269,7 +273,7 @@ export default function ResourcesManagementClient({
                   return (
                     <div
                       key={tool.url}
-                      className="flex items-center gap-4 p-4 bg-[#FDFBF7] rounded-lg hover:bg-[#F3EFE9] transition-colors"
+                      className="flex items-center gap-4 p-4 bg-[#FDFBF7] rounded-lg hover:bg-[#F3EFE9] transition-colors min-w-0"
                     >
                       {/* Logo */}
                       <div className="w-16 h-16 rounded bg-gray-200 overflow-hidden flex-shrink-0">
@@ -285,26 +289,27 @@ export default function ResourcesManagementClient({
                       </div>
 
                       {/* Info */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-[#2D2D2D] mb-1 truncate">
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <h4 className="font-semibold text-[#2D2D2D] mb-1 truncate" title={tool.name}>
                           {tool.name}
                         </h4>
-                        <p className="text-sm text-gray-600 mb-2">
+                        <p className="text-sm text-gray-600 mb-2 truncate" title={tool.category}>
                           {tool.category}
                         </p>
                         <a
                           href={tool.websiteUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-xs text-[#8DA399] hover:underline"
+                          className="flex items-center gap-1 text-xs text-[#8DA399] hover:underline truncate"
+                          title={tool.websiteUrl}
                         >
-                          <ExternalLink className="h-3 w-3" />
-                          访问网站
+                          <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                          <span className="truncate">访问网站</span>
                         </a>
                       </div>
 
                       {/* Stats */}
-                      <div className="flex gap-6 text-sm text-gray-600">
+                      <div className="flex gap-6 text-sm text-gray-600 flex-shrink-0">
                         <div className="text-center">
                           <div className="font-bold text-[#2D2D2D]">
                             {tool._count.resourceClicks}
@@ -320,17 +325,20 @@ export default function ResourcesManagementClient({
                       </div>
 
                       {/* Actions */}
-                      <div className="flex gap-2">
-                        <Button
-                          asChild
-                          variant="outline"
-                          size="sm"
-                          className="border-[#8DA399] text-[#8DA399] hover:bg-[#F3EFE9]"
+                      <div className="flex gap-2 flex-shrink-0">
+                        <AffiliateLink
+                          href={tool.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <Link href={`/resources/tool/${tool.url}`}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-[#8DA399] text-[#8DA399] hover:bg-[#F3EFE9]"
+                          >
                             查看详情
-                          </Link>
-                        </Button>
+                          </Button>
+                        </AffiliateLink>
                       </div>
                     </div>
                   )

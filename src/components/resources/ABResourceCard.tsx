@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { VariantConfig } from '@/lib/ab-testing'
+import { AffiliateLink } from './AffiliateLink'
 
 interface Resource {
   title: string
@@ -78,13 +79,13 @@ export function ABResourceCard({ resource, config, onTrackClick, assignmentId }:
                 className="w-full bg-[#8DA399] hover:bg-[#6B8379] text-white"
                 onClick={handleClick}
               >
-                <a
+                <AffiliateLink
                   href={resource.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {resource.type === 'BOOK' ? 'View on Amazon →' : 'Explore Tool →'}
-                </a>
+                </AffiliateLink>
               </Button>
             )}
           </div>
@@ -122,13 +123,13 @@ export function ABResourceCard({ resource, config, onTrackClick, assignmentId }:
               className="w-full mt-4 bg-[#8DA399] hover:bg-[#6B8379] text-white"
               onClick={handleClick}
             >
-              <a
+              <AffiliateLink
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {resource.type === 'BOOK' ? 'View on Amazon →' : 'Explore Tool →'}
-              </a>
+              </AffiliateLink>
             </Button>
           )}
         </CardContent>
@@ -190,13 +191,13 @@ export function ABResourceCard({ resource, config, onTrackClick, assignmentId }:
                   className="bg-[#8DA399] hover:bg-[#6B8379] text-white"
                   onClick={handleClick}
                 >
-                  <a
+                  <AffiliateLink
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {resource.type === 'BOOK' ? 'View →' : 'Explore →'}
-                  </a>
+                  </AffiliateLink>
                 </Button>
               ) : (
                 <Button
@@ -204,13 +205,13 @@ export function ABResourceCard({ resource, config, onTrackClick, assignmentId }:
                   className="bg-[#8DA399] hover:bg-[#6B8379] text-white"
                   onClick={handleClick}
                 >
-                  <a
+                  <AffiliateLink
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {resource.type === 'BOOK' ? 'View on Amazon →' : 'Explore Tool →'}
-                  </a>
+                  </AffiliateLink>
                 </Button>
               )}
             </div>

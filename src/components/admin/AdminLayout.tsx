@@ -9,7 +9,8 @@ import {
   MessageSquare,
   FlaskConical,
   LogOut,
-  Shield
+  Shield,
+  Languages
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useSession, signOut } from 'next-auth/react'
@@ -51,6 +52,12 @@ const navItems: NavItem[] = [
     href: '/admin/abtesting',
     icon: FlaskConical,
     description: '实验和优化'
+  },
+  {
+    title: '翻译管理',
+    href: '/admin/translations',
+    icon: Languages,
+    description: '多语言内容管理'
   }
 ]
 
@@ -91,7 +98,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-[#E5E0D8] min-h-[calc(100vh-73px)] sticky top-[73px] self-start">
+        <aside className="w-64 bg-white border-r border-[#E5E0D8] min-h-[calc(100vh-73px)] sticky top-[73px] self-start relative">
           <nav className="p-4 space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon

@@ -154,7 +154,7 @@ export default function AdminDashboardClient({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-3 gap-4">
               <Button
                 asChild
                 className="bg-[#8DA399] hover:bg-[#6B8379] text-white"
@@ -178,6 +178,12 @@ export default function AdminDashboardClient({
                 className="bg-[#C7826B] hover:bg-[#A66A55] text-white"
               >
                 <Link href="/admin/abtesting">A/B 测试</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-[#6B9BD1] hover:bg-[#4A7BB0] text-white md:col-span-2"
+              >
+                <Link href="/admin/translations">翻译管理</Link>
               </Button>
             </div>
           </CardContent>

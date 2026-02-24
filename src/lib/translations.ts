@@ -318,7 +318,7 @@ export async function getPracticeById(id: string, locale: Locale = 'en'): Promis
 // Articles Translation
 // ============================================================================
 
-export async function getArticles(locale: Locale = 'en, limit: number = 10): Promise<LocalizedArticle[]> {
+export async function getArticles(locale: Locale = 'en', limit: number = 10): Promise<LocalizedArticle[]> {
   const cacheKey = `articles:${locale}:${limit}`;
   const cached = getCached<LocalizedArticle[]>(cacheKey);
   if (cached) return cached;
@@ -478,7 +478,9 @@ export async function getTranslationProgress(contentType?: 'meta_skills' | 'prac
   // Calculate percentage
   return results.map(r => ({
     ...r,
-    percentage: Math.round((r.totalTranslations / r.requiredTranslations) * 100)
+    totalTranslations: Number(r.totalTranslations),
+    requiredTranslations: Number(r.requiredTranslations),
+    percentage: Math.round((Number(r.totalTranslations) / Number(r.requiredTranslations)) * 100)
   }));
 }
 
