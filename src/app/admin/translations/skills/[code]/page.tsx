@@ -47,7 +47,7 @@ async function updateTranslation(code: string, locale: string, data: any) {
     where: { code },
     include: {
       translations: {
-        where: { locale: 'en', isPublished: true }
+        where: { locale: 'en', status: 'PUBLISHED' }
       }
     }
   })
@@ -172,13 +172,13 @@ export default async function SkillTranslationEditorPage({
             <div>
               <Label className="text-blue-900 font-semibold">定义</Label>
               <p className="text-gray-800 mt-1 whitespace-pre-wrap">
-                {englishTranslation?.definition || skill.definition}
+                {englishTranslation?.definition || 'N/A'}
               </p>
             </div>
             <div>
               <Label className="text-blue-900 font-semibold">重要性</Label>
               <p className="text-gray-800 mt-1 whitespace-pre-wrap">
-                {englishTranslation?.whyImportant || skill.whyImportant}
+                {englishTranslation?.whyImportant || 'N/A'}
               </p>
             </div>
           </CardContent>

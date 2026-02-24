@@ -152,6 +152,13 @@ function generateAffiliateUrl(
  * Get referral statistics for a user
  */
 export async function getReferralStats(userId: string) {
+  // Get referral codes first
+  const userReferrals = await prisma.userReferral.findMany({
+    where: { referrerId: userId },
+    select: { referralCode: true }
+  })
+  const referralCodes = userReferrals.map(r => r.referralCode!)
+
   const [
     totalReferrals,
     activeReferrals,
@@ -174,7 +181,7 @@ export async function getReferralStats(userId: string) {
     // Total conversions from referrals
     prisma.affiliateConversion.count({
       where: {
-        referralCode: { in: prisma.userReferral.findMany({ where: { referrerId: userId }, select: { referralCode: true } }).then(r => r.map(x => x.referralCode!)) },
+        referralCode: { in: referralCodes },
         converted: true
       }
     }),

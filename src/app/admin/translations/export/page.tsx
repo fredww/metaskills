@@ -57,7 +57,7 @@ export default function TranslationExportPage() {
     } catch (error) {
       setResult({
         success: false,
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       })
     } finally {
       setExporting(false)

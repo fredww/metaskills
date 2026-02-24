@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       where: { code: skillCode },
       include: {
         translations: {
-          where: { locale: 'en', isPublished: true }
+          where: { locale: 'en', status: 'PUBLISHED' }
         }
       }
     })
@@ -102,15 +102,21 @@ export async function POST(request: Request) {
       practice = await prisma.practice.create({
         data: {
           id: practiceId,
-          title: practiceInfo.title,
-          description: practiceInfo.description,
           duration: practiceInfo.duration,
           difficulty: "BEGINNER",
           emotionTone: "CALM",
-          instructions: {},
-          benefits: [],
-          tips: [],
-          skillId: skill.id
+          skillId: skill.id,
+          translations: {
+            create: {
+              locale: 'en',
+              status: 'PUBLISHED',
+              title: practiceInfo.title,
+              description: practiceInfo.description,
+              instructions: {},
+              benefits: [],
+              tips: []
+            }
+          }
         }
       })
     }
@@ -214,12 +220,12 @@ export async function GET(request: Request) {
             skill: {
               include: {
                 translations: {
-                  where: { locale: 'en', isPublished: true }
+                  where: { locale: 'en', status: 'PUBLISHED' }
                 }
               }
             },
             translations: {
-              where: { locale: 'en', isPublished: true }
+              where: { locale: 'en', status: 'PUBLISHED' }
             }
           }
         }

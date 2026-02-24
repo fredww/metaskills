@@ -1,13 +1,12 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
+import type { UserRole } from "@prisma/client"
 
-export const authOptions = {
-  adapter: PrismaAdapter(prisma),
+export const authOptions: any = {
   session: { strategy: "jwt" as const },
   providers: [
     CredentialsProvider({
@@ -42,13 +41,29 @@ export const authOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
-          image: user.image
+          image: user.image,
+          role: user.role
         }
       }
     })
   ],
   pages: {
     signIn: "/login"
+  },
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.role = user.role
+      }
+      return token
+    },
+    async session({ session, token }: any) {
+      if (session?.user) {
+        session.user.id = token.sub
+        session.user.role = token.role
+      }
+      return session
+    }
   }
 }
 
@@ -60,7 +75,7 @@ export { handler as GET, handler as POST }
  * Get current user with role information
  */
 export async function getCurrentUser() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions) as any
 
   if (!session?.user?.email) {
     return null
@@ -110,7 +125,7 @@ export async function requireAdmin() {
  * Returns error response if not admin
  */
 export async function requireAdminApi() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions) as any
 
   if (!session?.user?.email) {
     return {

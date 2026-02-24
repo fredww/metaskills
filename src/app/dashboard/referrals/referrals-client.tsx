@@ -230,7 +230,7 @@ export function ReferralDashboardClient() {
         </div>
 
         {/* Pending Payouts */}
-        {stats?.pendingPayouts > 0 && (
+        {stats && stats.pendingPayouts > 0 && (
           <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
             <div className="text-sm text-yellow-800">
               你有 {stats.pendingPayouts} 个待处理的提现请求

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
       translations: {
         where: {
           locale: 'en',
-          isPublished: true
+          status: 'PUBLISHED'
         },
         take: 1
       }
@@ -73,7 +73,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       translations: {
         where: {
           locale: 'en',
-          isPublished: true
+          status: 'PUBLISHED'
         },
         take: 1
       }

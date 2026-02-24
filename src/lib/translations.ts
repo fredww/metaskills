@@ -343,12 +343,10 @@ export async function getArticles(locale: Locale = 'en', limit: number = 10): Pr
       ON a.id = at."articleId"
       AND at.locale = ${locale}
       AND at.status = 'PUBLISHED'
-      AND at."isPublished" = true
     LEFT JOIN "article_translations" en_at
       ON a.id = en_at."articleId"
       AND en_at.locale = 'en'
       AND en_at.status = 'PUBLISHED'
-      AND en_at."isPublished" = true
     WHERE a."isPublished" = true
     ORDER BY a."publishedAt" DESC
     LIMIT ${limit}
@@ -385,12 +383,10 @@ export async function getArticleBySlug(slug: string, locale: Locale = 'en'): Pro
       ON a.id = at."articleId"
       AND at.locale = ${locale}
       AND at.status = 'PUBLISHED'
-      AND at."isPublished" = true
     LEFT JOIN "article_translations" en_at
       ON a.id = en_at."articleId"
       AND en_at.locale = 'en'
       AND en_at.status = 'PUBLISHED'
-      AND en_at."isPublished" = true
     WHERE a.slug = ${slug}
       AND a."isPublished" = true
     LIMIT 1
@@ -502,7 +498,7 @@ export async function getOverallTranslationStatus(): Promise<{
   const [skillTranslations, practiceTranslations, articleTranslations] = await Promise.all([
     prisma.metaSkillTranslation.count({ where: { status: 'PUBLISHED' } }),
     prisma.practiceTranslation.count({ where: { status: 'PUBLISHED' } }),
-    prisma.articleTranslation.count({ where: { status: 'PUBLISHED', isPublished: true } })
+    prisma.articleTranslation.count({ where: { status: 'PUBLISHED' } })
   ]);
 
   const requiredTranslations = 7; // en, zh-CN, de, ja, fr, es, ko

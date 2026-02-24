@@ -23,7 +23,7 @@ export async function GET(request: Request) {
       where,
       include: {
         translations: {
-          where: { locale: 'en', isPublished: true }
+          where: { locale: 'en', status: 'PUBLISHED' }
         }
       },
       orderBy: { publishedAt: 'desc' }
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     // Transform articles to match the interface
     const transformedArticles = articles.map(article => ({
       id: article.id,
-      title: article.translations[0]?.title || article.code,
+      title: article.translations[0]?.title || article.slug,
       slug: article.slug,
       excerpt: article.translations[0]?.excerpt || '',
       type: article.type,
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
       authorTitle: article.authorTitle,
       coverImage: article.coverImage,
       category: article.category,
-      publishedAt: article.publishedAt.toISOString()
+      publishedAt: article.publishedAt?.toISOString() || new Date().toISOString()
     }))
 
     return NextResponse.json({ articles: transformedArticles })

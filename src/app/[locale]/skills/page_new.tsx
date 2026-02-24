@@ -7,7 +7,7 @@ import Link from "next/link"
 import { getTranslations } from 'next-intl/server'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { getSkills, type Locale } from "../data-service"
+import { getSkills, type Locale } from "./data-service"
 
 interface SkillsPageProps {
   params: Promise<{ locale: string }>

@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Link from "next/link"
 import { ArrowLeft, Upload, CheckCircle, XCircle, AlertCircle } from "lucide-react"
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,7 +23,7 @@ async function importTranslations(formData: FormData) {
   const locale = formData.get('locale') as string
 
   if (!file) {
-    return { error: '请选择文件' }
+    redirect('/admin/translations/import?error=no_file')
   }
 
   // Create form data for API
@@ -32,7 +33,8 @@ async function importTranslations(formData: FormData) {
   apiFormData.append('locale', locale)
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/translations/import`, {
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const response = await fetch(`${baseUrl}/api/translations/import`, {
       method: 'POST',
       body: apiFormData
     })
@@ -40,12 +42,12 @@ async function importTranslations(formData: FormData) {
     const result = await response.json()
 
     if (!response.ok) {
-      return { error: result.error || '导入失败' }
+      redirect(`/admin/translations/import?error=${encodeURIComponent(result.error || '导入失败')}`)
     }
 
-    return { success: true, data: result }
+    redirect('/admin/translations/import?success=true')
   } catch (error) {
-    return { error: '网络错误: ' + error.message }
+    redirect('/admin/translations/import?error=' + encodeURIComponent('网络错误: ' + (error instanceof Error ? error.message : 'Unknown error')))
   }
 }
 

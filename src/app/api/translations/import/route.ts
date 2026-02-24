@@ -69,7 +69,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error importing translations:', error);
     return NextResponse.json(
-      { error: 'Failed to import translations', details: error.message },
+      { error: 'Failed to import translations', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
@@ -114,7 +114,7 @@ async function importSkillTranslations(data: any[], locale: string) {
       results.push({
         code: item.code,
         success: false,
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   }
@@ -152,7 +152,7 @@ async function importPracticeTranslations(data: any[], locale: string) {
       results.push({
         practiceId: item.practiceId,
         success: false,
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   }
@@ -199,7 +199,7 @@ async function importArticleTranslations(data: any[], locale: string) {
       results.push({
         slug: item.slug,
         success: false,
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
   }

@@ -42,7 +42,8 @@ export default async function PracticesTranslationsPage({
       skill: {
         select: {
           code: true,
-          title: true
+          domain: true,
+          stage: true
         }
       },
       translations: {
@@ -64,7 +65,7 @@ export default async function PracticesTranslationsPage({
     if (!acc[skillCode]) {
       acc[skillCode] = {
         skillCode,
-        skillTitle: practice.skill.title,
+        skillTitle: practice.skill.code, // Use code as title since titles are in translations
         practices: []
       }
     }
