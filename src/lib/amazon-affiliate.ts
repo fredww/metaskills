@@ -5,7 +5,7 @@
 
 // Your Amazon Associates tracking ID
 // Set this in .env.local: NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG=metaskillsai-20
-const AMAZON_ASSOCIATES_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG || 'metaskills-20'
+const AMAZON_ASSOCIATES_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATES_TAG || 'metaskillsai-20'
 
 // Feature flag: enable/disable affiliate links
 const AFFILIATE_ENABLED = process.env.NEXT_PUBLIC_AFFILIATE_ENABLED !== 'false'
