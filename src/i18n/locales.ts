@@ -25,17 +25,6 @@ export const localeNames: Record<Locale, string> = {
   'ko': '한국어',
 };
 
-// Domain mapping for subdomain strategy
-export const localeDomains: Record<Locale, string> = {
-  'en': 'metaskills.ai',
-  'zh-CN': 'zh.metaskills.ai',
-  'de': 'de.metaskills.ai',
-  'ja': 'ja.metaskills.ai',
-  'fr': 'fr.metaskills.ai',
-  'es': 'es.metaskills.ai',
-  'ko': 'ko.metaskills.ai',
-};
-
 // Regions where each locale is spoken
 export const localeRegions: Record<Locale, string[]> = {
   'en': ['US', 'GB', 'CA', 'AU', 'NZ', 'IE', 'SG'],

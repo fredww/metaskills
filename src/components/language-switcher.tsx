@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { locales, localeNames, localeDomains, type Locale } from '@/i18n/locales';
+import { locales, localeNames, type Locale } from '@/i18n/locales';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -20,30 +20,11 @@ export function LanguageSwitcher() {
   const [isPending, startTransition] = useTransition();
 
   const switchLocale = (newLocale: Locale) => {
-    const isDevelopment = process.env.NODE_ENV === 'development' ||
-                          window.location.hostname === 'localhost' ||
-                          window.location.hostname === '127.0.0.1';
-
-    if (isDevelopment) {
-      // Development: use path-based routing (e.g., http://localhost:3000/de)
-      startTransition(() => {
-        router.replace(pathname, { locale: newLocale });
-      });
-    } else {
-      // Production: use subdomain-based routing (e.g., https://de.metaskills.ai/)
-      const targetDomain = localeDomains[newLocale];
-      const currentDomain = localeDomains[locale];
-
-      // If same domain, use client-side navigation
-      if (targetDomain === currentDomain) {
-        startTransition(() => {
-          router.replace(pathname);
-        });
-      } else {
-        // Cross-domain navigation
-        window.location.href = `https://${targetDomain}${pathname}`;
-      }
-    }
+    // Use next-intl's router to handle locale switching
+    // This works with subdirectory routing for both development and production
+    startTransition(() => {
+      router.replace(pathname, { locale: newLocale });
+    });
   };
 
   return (
